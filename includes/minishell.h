@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/14 15:26:13 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/18 17:30:10 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@
 
 # define MAX_DIRLEN		1024
 
-# define MSG_QUOTE_ERR	"Invalid quote syntax\n"
-
-# define STX_ERR		0
-# define STX_OK			1
+# define PREFIX_EXPORT "declare -x "
 
 # define SQUOTE			1
 # define DQUOTE			2
@@ -172,7 +169,6 @@ t_binode	*parsetree(char *str, t_data *data);
 void		here_doc_child(int *fd, char *limit, t_data *data);
 char		*find_path(char **envp, char *cmd);
 char		**split_path(char **envp);
-char		*strcomb(char *s1, char *s2);
 
 /*
 ** init_data.c
@@ -196,7 +192,6 @@ char		*replace_dollar_sign(char *str, char **envp);
 */
 void		new_process(char *cmd, t_data *data);
 void		child_process(char *cmd, t_data *data);
-int			pre_exec_cmd(t_data *data, char **new_argv, char **path);
 void		open_fd_with_type(char *redr, char *file, t_data *data);
 
 /*
@@ -243,7 +238,7 @@ int			switch_routine(char **new_argv, t_data *data);
 /*
 ** pt_env.c
 */
-int			pt_env(char **new_argv);
+int			pt_env(char **new_argv, char *prefix);
 /*
 ** pt_export.c
 */

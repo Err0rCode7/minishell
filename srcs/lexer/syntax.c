@@ -1,16 +1,6 @@
 
 #include "minishell.h"
 
-void	syntax_word(t_binode *node, t_data *data)
-{
-	char	**arr;
-
-	return ;
-	arr = ft_split(node->data, ' ');
-	if (arr[0] && !find_path(data->envp, arr[0]))
-		data->syntax = STX_ERR;
-}
-
 void	syntax_redr(t_binode *node, t_data *data)
 {
 	int	sw[5];

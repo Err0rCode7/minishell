@@ -28,7 +28,8 @@ char	**ft_split_free(char **arr)
 	if (arr)
 		while (arr[i])
 			free(arr[i++]);
-	free(arr);
+	if (!arr)
+		free(arr);
 	return (NULL);
 }
 

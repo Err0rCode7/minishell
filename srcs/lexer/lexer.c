@@ -11,8 +11,6 @@ void	divide_str(int divide_kind, t_binode *parent, t_data *data)
 		divide_redirect(parent);
 	if (divide_kind == T_REDR)
 		syntax_redr(parent, data);
-	if (divide_kind == T_WORD)
-		syntax_word(parent, data);
 }
 
 void	recur_parse(t_binode *parent, t_data *data)

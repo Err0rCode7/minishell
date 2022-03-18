@@ -36,9 +36,9 @@ t_binode	*tree_make_binode(char *str, int typecode)
 	t_binode	*tmp;
 
 	tmp = (t_binode *)malloc(sizeof(t_binode));
-	if (!tmp)
-		return (NULL);
-	tmp->data = ft_strndup(str, ft_strlen(str));
+	tmp->data = ft_strdup(str);
+	if (!tmp || !tmp->data)
+		exit(1);
 	tmp->type = typecode;
 	tmp->left = NULL;
 	tmp->right = NULL;

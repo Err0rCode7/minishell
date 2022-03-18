@@ -5,10 +5,14 @@ void	execute(t_binode *tree, t_data *data)
 {
 	if (!tree)
 		return ;
-	if (tree->type == T_REDR)
+	if (tree->type == T_REDR) {
+		tree->data = replace_dollar_sign(tree->data, data->envp);
 		execute_redr(tree, data);
-	if (tree->type == T_WORD)
+	}
+	if (tree->type == T_WORD) {
+		tree->data = replace_dollar_sign(tree->data, data->envp);
 		execute_word(tree, data);
+	}
 	execute(tree->left, data);
 	execute(tree->right, data);
 }
@@ -25,12 +29,8 @@ void	execute_redr(t_binode *parent, t_data *data)
 			break ;
 	redr = ft_strndup(parent->data, i);
 	arr = cmd_tokenizer(parent->data + i);
-	if (!*arr)
-	{
-		if (arr)
-			free(arr);
-		return ;
-	}
+	if (!arr || !redr)
+        exit(1);
 	open_fd_with_type(redr, arr[0], data);
 	free(redr);
 	ft_split_free(arr);
@@ -55,7 +55,7 @@ void	exec_fork(t_binode *parent, t_data *data)
 	ignore_signal(ignore_sig);
 	pid = fork();
 	if (pid < 0)
-		pt_exit_status("Fork Error");
+		pt_exit_status(MSG_FORK_ERR);
 	if (!pid)
 		new_process(parent->data, data);
 	else
@@ -76,6 +76,8 @@ void	execute_word(t_binode *parent, t_data *data)
 	if (!parent->data || !(*parent->data) || str_only_space(parent->data))
 		return ;
 	new_argv = cmd_tokenizer(parent->data);
+	if (!new_argv)
+		exit(1);
 	i = switch_routine(new_argv, data);
 	if (i)
 	{

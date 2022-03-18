@@ -13,8 +13,8 @@ int	init_buffer(t_buffer *buffer, size_t size)
 void	flush_buffer(t_buffer *buffer, char **arr)
 {
 	buffer->arr[buffer->size] = 0;
-	if (!*arr)
-		*arr = ft_strndup("", 0);
 	ft_combine(arr, buffer->arr);
+	if (*arr == NULL)
+		exit(1);
 	buffer->size = 0;
 }

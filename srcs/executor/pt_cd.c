@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-char	*find_home(char *str, char **envp)
+static char	*find_home(char *str, char **envp)
 {
 	int		i;
 	char	*tmp;
@@ -40,6 +40,6 @@ int	pt_cd(char **argv, t_data *data)
 		return (0);
 	}
 	free(path);
-	pt_exit_status("No such file or directory");
+	pt_exit_status(MSG_FILE_NOT_FOUND_ERR);
 	return (0);
 }

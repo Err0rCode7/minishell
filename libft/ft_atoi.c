@@ -1,28 +1,30 @@
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *s)
 {
-	int		ans;
-	int		i;
-	int		minus;
+	unsigned long long	total;
+	unsigned long long	max;
+	int					flag;
 
-	ans = 0;
-	i = 0;
-	minus = 1;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
+	max = 9223372036854775807;
+	while (*s == ' ' || (*s >= 9 && *s <= 13))
+		s++;
+	flag = 0;
+	if (*s == '-' || *s == '+')
 	{
-		if (nptr[i] == '-')
-			minus = -1;
-		i++;
+		if (*s == '-')
+			flag = 1;
+		s++;
 	}
-	while (ft_isdigit(nptr[i]))
-	{
-		ans *= 10;
-		ans += minus * (nptr[i] - '0');
-		i++;
-	}
-	return (ans);
+	total = 0;
+	while (*s >= '0' && *s <= '9')
+		total = total * 10 + *s++ - 48;
+	if (total > max && flag == 0)
+		return (-1);
+	else if (total > max && flag == 1)
+		return (0);
+	if (flag == 1)
+		total *= -1;
+	return ((int)total);
 }

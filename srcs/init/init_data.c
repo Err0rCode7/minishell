@@ -18,10 +18,13 @@ char	**dup_envp(char **envp)
 
 	result = malloc(sizeof(char *) * (get_size_envp(envp) + 1));
 	if (result == NULL)
-		exit(-1);
+		exit(1);
 	i = -1;
-	while (envp[++i])
+	while (envp[++i]) {
 		result[i] = ft_strdup(envp[i]);
+		if (!result[i])
+			exit(1);
+	}
 	result[i] = NULL;
 	return (result);
 }

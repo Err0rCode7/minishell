@@ -33,7 +33,8 @@ void	ft_combine(char **files, char *buff)
 	char	*tmp;
 
 	tmp = ft_strjoin(*files, buff);
-	free(*files);
+	if (*files)
+		free(*files);
 	*files = tmp;
 }
 

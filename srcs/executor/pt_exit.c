@@ -50,7 +50,7 @@ int	pt_exit(char **cmd)
 		exit(g_exit_status);
 	else if (cnt == 2 && ft_isdigit_eachstr(cmd[1]))
 	{
-		g_exit_status = ft_atoi(cmd[1]);
+		g_exit_status = ft_atoi(cmd[1]) % 256;
 		exit(g_exit_status);
 	}
 	else if (cnt > 2 && ft_isdigit_eachstr(cmd[1]))
