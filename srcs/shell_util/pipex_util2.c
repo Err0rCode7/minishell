@@ -57,6 +57,4 @@ void	action_parent(int *fd, pid_t *parent, int *exitcode)
 	if (WIFSIGNALED(exitcode))
 		g_exit_status = 128 + WTERMSIG(exitcode);
 	close(fd[0]);
-	if (g_exit_status != 0)
-		g_exit_status = 0;
 }

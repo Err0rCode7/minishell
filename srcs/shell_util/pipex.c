@@ -6,11 +6,6 @@ void	new_process(char *cmd, t_data *data)
 	char	**new_argv;
 	char	*path;
 
-	if (g_exit_status != 0)
-	{
-		g_exit_status = 0;
-		return ;
-	}
 	new_argv = cmd_tokenizer(cmd);
 	if (!new_argv)
 		exit(1);
