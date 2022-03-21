@@ -68,6 +68,8 @@ char	*find_path(char **envp, char *cmd)
 	int		i;
 	char	*path;
 
+	if (ft_access(cmd, O_RDONLY) == 0)
+		return (cmd);
 	arr = split_path(envp);
 	if (!arr)
 		return (NULL);
@@ -85,8 +87,6 @@ char	*find_path(char **envp, char *cmd)
 	ft_split_free(arr);
 	if (path)
 		return (path);
-	if (ft_strncmp(cmd, "./", 2) == 0 && ft_access(cmd, O_RDONLY) == 0)
-		return (cmd);
 	return (NULL);
 }
 
