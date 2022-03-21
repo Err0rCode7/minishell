@@ -40,4 +40,5 @@ void	init_data(t_data *data)
 {
 	data->syntax = STX_OK;
 	data->pipecnt = 0;
+	data->roe_flag = 0;
 }

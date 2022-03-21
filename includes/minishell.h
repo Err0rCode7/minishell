@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/21 22:00:53 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/21 23:11:53 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_data
 	char	**envp;
 	int		syntax;
 	int		pipecnt;
+	int		roe_flag;
 }				t_data;
 
 typedef struct s_fdargs
@@ -199,8 +200,8 @@ void		open_fd_with_type(char *redr, char *file, t_data *data);
 */
 void		here_doc(char *limit, t_data *data);
 void		action_parent(int *fd, pid_t *parent, int *exitcode);
-void		right_redr(int *fd, char *file);
-void		left_redr(int *fd, char *file);
+void		right_redr(int *fd, char *file, t_data *data);
+void		left_redr(int *fd, char *file, t_data *data);
 
 /*
 ** buffer.c

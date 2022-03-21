@@ -84,6 +84,7 @@ void	execute_word(t_binode *parent, t_data *data)
 		if (data->pipecnt--)
 		{
 			child_process(parent->data, data);
+			data->roe_flag = 0;
 			ft_split_free(new_argv);
 			return ;
 		}

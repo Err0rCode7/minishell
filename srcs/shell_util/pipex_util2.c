@@ -22,7 +22,7 @@ void	here_doc(char *limit, t_data *data)
 	}
 }
 
-void	left_redr(int *fd, char *file)
+void	left_redr(int *fd, char *file, t_data *data)
 {
 	*fd = open(file, O_RDONLY, 0644);
 	if (*fd < 0)
@@ -32,13 +32,17 @@ void	left_redr(int *fd, char *file)
 		*fd = open("/dev/null", O_RDONLY, 0644);
 		if (*fd < 0)
 			exit(1);
+		data->roe_flag = 1;
 	}
 	if (0 > dup2(*fd, STDIN_FILENO))
 		pt_exit_status(MSG_DUP_TWO_ERR);
+	close(*fd);
 }
 
-void	right_redr(int *fd, char *file)
+void	right_redr(int *fd, char *file, t_data *data)
 {
+	if (data->roe_flag)
+		return ;
 	*fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (*fd < 0)
 	{
@@ -47,6 +51,8 @@ void	right_redr(int *fd, char *file)
 	}
 	else if (0 > dup2(*fd, STDOUT_FILENO))
 		pt_exit_status(MSG_DUP_TWO_ERR);
+	if (*fd > 0)
+		close(*fd);
 }
 
 void	action_parent(int *fd, pid_t *parent, int *exitcode)

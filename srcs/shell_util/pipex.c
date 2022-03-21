@@ -48,11 +48,13 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 	int	fd;
 
 	if (!ft_strncmp(redr, "<", 2))
-		left_redr(&fd, file);
+		left_redr(&fd, file, data);
 	else if (!ft_strncmp(redr, ">", 2))
-		right_redr(&fd, file);
+		right_redr(&fd, file, data);
 	else if (!ft_strncmp(redr, ">>", 3))
 	{
+		if (data->roe_flag)
+			return ;
 		fd = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 		if (fd < 0) // 수정이 필요
 			pt_exit_status(MSG_FILE_OPEN_ERR);
