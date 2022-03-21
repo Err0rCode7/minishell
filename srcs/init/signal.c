@@ -29,7 +29,6 @@ void	ignore_sig(int signo)
 		ft_putendl_fd("", STDOUT);
 		g_exit_status = 130;
 	}
-	return ;
 }
 
 void	ignore_signal(void (*handle)(int))
