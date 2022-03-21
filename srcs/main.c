@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:13:42 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -14,7 +25,7 @@ void	exec_tree(t_binode *tree, t_data *data)
 		tree_del_bintree(tree);
 }
 
-int ft_dup(int *original_fd)
+int	ft_dup(int *original_fd)
 {
 	original_fd[0] = dup(STDIN_FILENO);
 	original_fd[1] = dup(STDOUT_FILENO);

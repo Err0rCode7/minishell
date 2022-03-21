@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_str.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:03:06 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:12:34 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -108,7 +119,7 @@ char	**split_command(char *str)
 			isword(str[idx[indx] - 1]) && !idx[squote] && !idx[dquote])
 			idx[sw] = FALSE;
 		if (idx[sw])
-			(*tmp_strs)[idx[idx_str0]++] = str[idx[indx]]; 
+			(*tmp_strs)[idx[idx_str0]++] = str[idx[indx]];
 		else
 			(*(tmp_strs + 1))[idx[idx_str1]++] = str[idx[indx]];
 	}

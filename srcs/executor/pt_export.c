@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pt_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:01:18 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:04:56 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -86,7 +97,8 @@ int	pt_export(char ***envp, char **new_argv)
 		pt_env(*envp, PREFIX_EXPORT);
 	while (*++new_argv)
 	{
-		if (is_redipe(*new_argv)) {
+		if (is_redipe(*new_argv))
+		{
 			g_exit_status = 1;
 			prt_cmd_err_shellname(MSG_IDDENTIFIER_ERR, "export", *new_argv);
 			continue ;

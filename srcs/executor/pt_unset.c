@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pt_unset.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:01:27 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:23:35 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -24,7 +35,6 @@ static void	rm_env_var(int arg_idx, char ***envp)
 int	pt_unset(char ***envp, char **new_argv)
 {
 	int		i;
-	int		var_idx;
 
 	g_exit_status = 0;
 	i = 0;
@@ -38,14 +48,15 @@ int	pt_unset(char ***envp, char **new_argv)
 	}
 	while (*++new_argv)
 	{
-		if (is_redipe(*new_argv)) {
+		if (is_redipe(*new_argv))
+		{
 			g_exit_status = 1;
 			prt_cmd_err_shellname(MSG_IDDENTIFIER_ERR, "unset", *new_argv);
 			continue ;
 		}
-		var_idx = get_env_var(*new_argv, *envp);
-		if ((*envp)[var_idx])
-			rm_env_var(var_idx, envp);
+		i = get_env_var(*new_argv, *envp);
+		if ((*envp)[i])
+			rm_env_var(i, envp);
 	}
 	return (0);
 }

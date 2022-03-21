@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_util3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:32 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:10:54 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -18,5 +29,5 @@ char	*interprete_dollar_sign(char *str, int *size, char **envp)
 	while (envp[++j])
 		if (correct_env(envp[j], str + 1, i - 1))
 			return (ft_strdup(envp[j] + i));
-	return ft_strdup("");
+	return (ft_strdup(""));
 }

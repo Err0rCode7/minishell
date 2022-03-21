@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_util.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:10:17 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -34,32 +45,13 @@ char	**split_path(char **envp)
 
 static int	ft_access(char *file, int option)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, option);
 	if (fd < 0)
-		return fd;
+		return (fd);
 	close(fd);
-	return 0;
-}
-
-int chk_builtin(char *cmd)
-{
-    if (ft_strcmp(cmd, "exit") == 0)
-        return (1);
-    else if (ft_strcmp(cmd, "export") == 0)
-        return (1);
-    else if (ft_strcmp(cmd, "unset") == 0)
-        return (1);
-    else if (ft_strcmp(cmd, "env") == 0)
-        return (1);
-    else if (ft_strcmp(cmd, "echo") == 0)
-        return (1);
-	else if (ft_strcmp(cmd, "cd") == 0)
-        return (1);
-	else if (ft_strcmp(cmd, "pwd") == 0)
-        return (1);
-    return (0);
+	return (0);
 }
 
 char	*find_path(char **envp, char *cmd)

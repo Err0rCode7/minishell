@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:05:26 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -56,7 +67,7 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 		if (data->roe_flag)
 			return ;
 		fd = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
-		if (fd < 0) // 수정이 필요
+		if (fd < 0)
 			pt_exit_status(MSG_FILE_OPEN_ERR);
 		if (0 > dup2(fd, STDOUT_FILENO))
 			pt_exit_status(MSG_DUP_TWO_ERR);
