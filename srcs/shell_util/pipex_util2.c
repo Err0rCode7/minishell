@@ -29,8 +29,11 @@ void	left_redr(int *fd, char *file)
 	{
 		prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, file, NULL);
 		g_exit_status = 1;
+		*fd = open("/dev/null", O_RDONLY, 0644);
+		if (*fd < 0)
+			exit(1);
 	}
-	else if (0 > dup2(*fd, STDIN_FILENO))
+	if (0 > dup2(*fd, STDIN_FILENO))
 		pt_exit_status(MSG_DUP_TWO_ERR);
 }
 
