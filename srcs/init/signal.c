@@ -29,6 +29,11 @@ void	ignore_sig(int signo)
 		ft_putendl_fd("", STDOUT);
 		g_exit_status = 130;
 	}
+	else if (signo == SIGQUIT)
+	{
+		rl_on_new_line();
+		ft_putstr_fd("Quit: 3\n", STDOUT);
+	}
 }
 
 void	ignore_signal(void (*handle)(int))
