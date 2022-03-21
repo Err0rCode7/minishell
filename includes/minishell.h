@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/21 18:19:47 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/21 22:00:53 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define T_REDR			4
 
 # define TRUE			1
-# define 		FALSE			0
+# define FALSE			0
 
 # define MAX_DIRLEN		1024
 
@@ -230,6 +230,7 @@ void		put_buffer(t_buffer *buff, char c, int sw);
 ** pt_exit.c
 */
 int			pt_exit(char **cmd);
+int			print_execute_err_2(char *token1, char *token2, char *err_msg);
 
 /*
 ** executor/switch_routine.c

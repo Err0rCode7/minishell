@@ -34,7 +34,7 @@ void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg)
 	write(2, ": ", 2);
 	if (arg != NULL && arg[0] != 0)
 	{
-		write(2, "`", 3);
+		write(2, "`", 1);
 		write(2, arg, ft_strlen(arg));
 		write(2, "\': ", 3);
 	}

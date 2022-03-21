@@ -40,6 +40,7 @@ int	pt_cd(char **argv, t_data *data)
 		return (0);
 	}
 	free(path);
-	pt_exit_status(MSG_FILE_NOT_FOUND_ERR);
+	g_exit_status = 1;
+	print_execute_err_2(argv[0], argv[1], MSG_FILE_NOT_FOUND_ERR);
 	return (0);
 }

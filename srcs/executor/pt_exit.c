@@ -26,7 +26,7 @@ static int	print_execute_err_1(char *token, char *err_msg)
 	return (-1);
 }
 
-static int	print_execute_err_2(char *token1, char *token2, char *err_msg)
+int	print_execute_err_2(char *token1, char *token2, char *err_msg)
 {
 	ft_putstr_fd("minishell", STDERR);
 	ft_putstr_fd(": ", STDERR);
@@ -47,11 +47,11 @@ int	pt_exit(char **cmd)
 	while (cmd[cnt] != NULL)
 		cnt++;
 	if (cnt == 1)
-		exit(g_exit_status);
+		write(STDOUT, "exit\n", 5);
 	else if (cnt == 2 && ft_isdigit_eachstr(cmd[1]))
 	{
+		write(STDOUT, "exit\n", 5);
 		g_exit_status = ft_atoi(cmd[1]) % 256;
-		exit(g_exit_status);
 	}
 	else if (cnt > 2 && ft_isdigit_eachstr(cmd[1]))
 	{

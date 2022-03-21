@@ -39,6 +39,7 @@ int	pt_unset(char ***envp, char **new_argv)
 	while (*++new_argv)
 	{
 		if (is_redipe(*new_argv)) {
+			g_exit_status = 1;
 			prt_cmd_err_shellname(MSG_IDDENTIFIER_ERR, "unset", *new_argv);
 			continue ;
 		}
