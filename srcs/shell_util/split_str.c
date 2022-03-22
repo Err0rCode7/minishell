@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_str.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:03:06 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:12:34 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -29,24 +40,22 @@ char	**split_pipe(char *str)
 	char	*buf;
 
 	c = find_pipe(str);
-	tmp = (char **)malloc(sizeof(char *) * 3);
+	tmp = (char **)ft_calloc(sizeof(char *), 3);
 	if (!tmp)
 		return (NULL);
 	if (!c)
 	{
-		tmp[0] = ft_strndup(str, ft_strlen(str));
-		tmp[1] = ft_strndup("", 0);
-		tmp[2] = 0;
+		tmp[0] = ft_strdup(str);
+		tmp[1] = ft_strdup("");
 		return (tmp);
 	}
 	buf = ft_strndup(str, c - str);
 	tmp[0] = buf;
 	if (*(c + 1))
-		buf = ft_strndup(c + 1, ft_strlen(c + 1));
+		buf = ft_strdup(c + 1);
 	else
-		buf = ft_strndup("", 0);
+		buf = ft_strdup("");
 	tmp[1] = buf;
-	tmp[2] = 0;
 	return (tmp);
 }
 
@@ -55,6 +64,8 @@ int	*find_redirect(char *str)
 	int	*idx;
 
 	idx = (int *)malloc(sizeof(int) * 2);
+	if (idx == 0)
+		exit(1);
 	idx[0] = -1;
 	idx[1] = 0;
 	while (str[++idx[0]])
@@ -72,20 +83,17 @@ int	*find_redirect(char *str)
 char	**split_redirect(char *str)
 {
 	char	**arr;
-	char	*buf;
 	int		*idx;
 
 	idx = find_redirect(str);
 	arr = (char **)malloc(sizeof(char *) * 3);
 	if (!arr)
 		return (NULL);
-	buf = ft_strndup(str, idx[0]);
-	arr[0] = buf;
+	arr[0] = ft_strndup(str, idx[0]);
 	if (str[idx[1]])
-		buf = ft_strndup(str + idx[0], ft_strlen(str + idx[0]));
+		arr[1] = ft_strdup(str + idx[0]);
 	else
-		buf = ft_strndup("", 0);
-	arr[1] = buf;
+		arr[1] = ft_strdup("");
 	arr[2] = 0;
 	free(idx);
 	return (arr);

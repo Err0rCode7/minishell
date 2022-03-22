@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pt_cd.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:00:57 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*find_home(char *str, char **envp)
+static char	*find_home(char *str, char **envp)
 {
 	int		i;
 	char	*tmp;
@@ -40,6 +51,7 @@ int	pt_cd(char **argv, t_data *data)
 		return (0);
 	}
 	free(path);
-	pt_exit_status("No such file or directory");
+	g_exit_status = 1;
+	print_execute_err_2(argv[0], argv[1], MSG_FILE_NOT_FOUND_ERR);
 	return (0);
 }

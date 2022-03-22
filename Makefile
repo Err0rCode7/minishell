@@ -134,7 +134,7 @@ VPATH	=	$(DIR_SRC) $(addprefix $(DIR_SRC)/, $(SUBDIRS))
 # ----------------------------------
 
 CC		=	gcc
-CFLAGS	=	-Werror -Wextra -Wall -g
+CFLAGS	=	-Werror -Wextra -Wall -g -fsanitize=address
 CLIBFMW	=	-L$(DIR_FT) -lft -L$(DIR_RL) -lreadline
 
 # ----------------------------------

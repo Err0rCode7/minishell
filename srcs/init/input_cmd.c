@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:01:49 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 01:01:53 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -7,9 +18,15 @@ char	*get_cmd(char **buf)
 	char	*prompt;
 
 	tmp = getcwd(0, MAX_DIRLEN);
-	prompt = ft_strjoin(tmp, " \x1b[32m$\x1b[0m ");
+	if (tmp == NULL)
+		exit(1);
+	prompt = ft_strjoin(tmp, " $ ");
 	free(tmp);
+	if (!prompt)
+		exit(1);
 	*buf = readline(prompt);
+	if (!*buf)
+		exit(1);
 	free(prompt);
 	return (*buf);
 }

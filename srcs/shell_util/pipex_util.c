@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_util.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:10:17 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*strcomb(char *s1, char *s2)
+static char	*strcomb(char *s1, char *s2)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -9,8 +20,12 @@ char	*strcomb(char *s1, char *s2)
 	if (!s2)
 		return (NULL);
 	tmp = ft_strjoin(s1, "/");
+	if (!tmp)
+		return (NULL);
 	tmp2 = ft_strjoin(tmp, s2);
 	free(tmp);
+	if (!tmp2)
+		return (NULL);
 	return (tmp2);
 }
 
@@ -28,29 +43,43 @@ char	**split_path(char **envp)
 	return (arr);
 }
 
+static int	ft_access(char *file, int option)
+{
+	int	fd;
+
+	fd = open(file, option);
+	if (fd < 0)
+		return (fd);
+	close(fd);
+	return (0);
+}
+
 char	*find_path(char **envp, char *cmd)
 {
 	char	**arr;
 	int		i;
 	char	*path;
 
-	if (access(cmd, F_OK) == 0)
+	if (ft_access(cmd, O_RDONLY) == 0)
 		return (cmd);
 	arr = split_path(envp);
 	if (!arr)
 		return (NULL);
-	i = 0;
-	while (arr[i])
+	i = -1;
+	while (arr[++i])
 	{
 		path = strcomb(arr[i], cmd);
-		if (access(path, F_OK) == 0)
+		if (!path)
+			exit(1);
+		if (ft_access(path, O_RDONLY) == 0)
 			break ;
 		free(path);
 		path = NULL;
-		i++;
 	}
 	ft_split_free(arr);
-	return (path);
+	if (path)
+		return (path);
+	return (NULL);
 }
 
 void	here_doc_child(int *fd, char *limit, t_data *data)
@@ -61,6 +90,7 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	close(fd[0]);
 	while (1)
 	{
+		write(1, "> ", 2);
 		line = get_next_line(0);
 		if (ft_strncmp(line, limit, ft_strlen(limit)) == 0)
 			exit(EXIT_SUCCESS);

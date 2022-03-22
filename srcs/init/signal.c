@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:01:53 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 01:03:40 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -23,8 +34,17 @@ void	handle_signal(int signo)
 
 void	ignore_sig(int signo)
 {
-	(void)signo;
-	return ;
+	if (signo == SIGINT)
+	{
+		rl_on_new_line();
+		ft_putendl_fd("", STDOUT);
+		g_exit_status = 130;
+	}
+	else if (signo == SIGQUIT)
+	{
+		rl_on_new_line();
+		ft_putstr_fd("Quit: 3\n", STDOUT);
+	}
 }
 
 void	ignore_signal(void (*handle)(int))

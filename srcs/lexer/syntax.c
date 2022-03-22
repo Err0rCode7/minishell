@@ -1,15 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:02 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:02:04 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
-void	syntax_word(t_binode *node, t_data *data)
-{
-	char	**arr;
-
-	return ;
-	arr = ft_split(node->data, ' ');
-	if (arr[0] && !find_path(data->envp, arr[0]))
-		data->syntax = STX_ERR;
-}
 
 void	syntax_redr(t_binode *node, t_data *data)
 {

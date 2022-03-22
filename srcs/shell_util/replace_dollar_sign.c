@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_dollar_sign.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:46 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:27:19 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -8,7 +19,11 @@ int	combine_variable(char **arr, char *str, char **envp)
 
 	size = 0;
 	tmp = interprete_dollar_sign(str, &size, envp);
+	if (tmp == 0)
+		exit(1);
 	ft_combine(arr, tmp);
+	if (!*arr)
+		exit(1);
 	free(tmp);
 	return (size - 1);
 }
@@ -23,15 +38,15 @@ void	ignore_single_quote(char *str, int *idx, t_buffer *buff)
 	}
 }
 
-char	*find_dollar(char *str, char **envp, t_buffer *buff)
+char	*find_dollar(char *str, char **envp, t_buffer *buff, int i)
 {
-	int		i;
 	int		sw;
 	char	*arr;
 
-	i = -1;
 	sw = 0;
-	arr = ft_strndup("", 0);
+	arr = ft_strdup("");
+	if (!arr)
+		exit(1);
 	while (str[++i])
 	{
 		if (buff->size == BUFFER_SIZE)
@@ -56,8 +71,9 @@ char	*replace_dollar_sign(char *str, char **envp)
 	char		*arr;
 	t_buffer	buff;
 
-	init_buffer(&buff, BUFFER_SIZE);
-	arr = find_dollar(str, envp, &buff);
+	if (init_buffer(&buff, BUFFER_SIZE) == 0)
+		exit(1);
+	arr = find_dollar(str, envp, &buff, -1);
 	flush_buffer(&buff, &arr);
 	free(buff.arr);
 	free(str);

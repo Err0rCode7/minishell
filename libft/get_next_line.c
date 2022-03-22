@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:14:42 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:14:43 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -33,7 +44,8 @@ void	ft_combine(char **files, char *buff)
 	char	*tmp;
 
 	tmp = ft_strjoin(*files, buff);
-	free(*files);
+	if (*files)
+		free(*files);
 	*files = tmp;
 }
 

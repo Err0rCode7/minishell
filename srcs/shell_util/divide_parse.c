@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   divide_parse.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:02:17 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:02:19 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -6,6 +17,8 @@ void	divide_pipe(t_binode *parent, t_data *data)
 	char	**splited_str;
 
 	splited_str = split_pipe(parent->data);
+	if (!splited_str || !splited_str[0] || !splited_str[1])
+		exit(1);
 	if (**splited_str)
 	{
 		tree_con_binode(parent, \
@@ -26,6 +39,8 @@ void	divide_command(t_binode *parent)
 	char	**splited_str;
 
 	splited_str = split_command(parent->data);
+	if (!splited_str || !splited_str[0] || !splited_str[1])
+		exit(1);
 	if (**splited_str)
 	{
 		tree_con_binode(parent, \
@@ -45,6 +60,8 @@ void	divide_redirect(t_binode *parent)
 	char	**splited_str;
 
 	splited_str = split_redirect(parent->data);
+	if (!splited_str || !splited_str[0] || !splited_str[1])
+		exit(1);
 	if (**splited_str)
 	{
 		tree_con_binode(parent, \

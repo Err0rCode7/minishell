@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:14:38 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:14:40 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -42,7 +53,7 @@ int					ft_isprint(int c);
 int					ft_isspace(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-int					ft_atoi(const char *nptr);
+int					ft_atoi(const char *s);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);

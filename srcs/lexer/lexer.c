@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:01:59 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:02:00 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -11,8 +22,6 @@ void	divide_str(int divide_kind, t_binode *parent, t_data *data)
 		divide_redirect(parent);
 	if (divide_kind == T_REDR)
 		syntax_redr(parent, data);
-	if (divide_kind == T_WORD)
-		syntax_word(parent, data);
 }
 
 void	recur_parse(t_binode *parent, t_data *data)

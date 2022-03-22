@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/14 15:26:13 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/22 00:59:49 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,11 @@
 # define T_REDR			4
 
 # define TRUE			1
-# define 		FALSE			0
+# define FALSE			0
 
 # define MAX_DIRLEN		1024
 
-# define MSG_QUOTE_ERR	"Invalid quote syntax\n"
-
-# define STX_ERR		0
-# define STX_OK			1
+# define PREFIX_EXPORT "declare -x "
 
 # define SQUOTE			1
 # define DQUOTE			2
@@ -95,6 +92,7 @@ typedef struct s_data
 	char	**envp;
 	int		syntax;
 	int		pipecnt;
+	int		roe_flag;
 }				t_data;
 
 typedef struct s_fdargs
@@ -172,7 +170,6 @@ t_binode	*parsetree(char *str, t_data *data);
 void		here_doc_child(int *fd, char *limit, t_data *data);
 char		*find_path(char **envp, char *cmd);
 char		**split_path(char **envp);
-char		*strcomb(char *s1, char *s2);
 
 /*
 ** init_data.c
@@ -196,7 +193,6 @@ char		*replace_dollar_sign(char *str, char **envp);
 */
 void		new_process(char *cmd, t_data *data);
 void		child_process(char *cmd, t_data *data);
-int			pre_exec_cmd(t_data *data, char **new_argv, char **path);
 void		open_fd_with_type(char *redr, char *file, t_data *data);
 
 /*
@@ -204,8 +200,8 @@ void		open_fd_with_type(char *redr, char *file, t_data *data);
 */
 void		here_doc(char *limit, t_data *data);
 void		action_parent(int *fd, pid_t *parent, int *exitcode);
-void		right_redr(int *fd, char *file);
-void		left_redr(int *fd, char *file);
+void		right_redr(int *fd, char *file, t_data *data);
+void		left_redr(int *fd, char *file, t_data *data);
 
 /*
 ** buffer.c
@@ -235,6 +231,7 @@ void		put_buffer(t_buffer *buff, char c, int sw);
 ** pt_exit.c
 */
 int			pt_exit(char **cmd);
+int			print_execute_err_2(char *token1, char *token2, char *err_msg);
 
 /*
 ** executor/switch_routine.c
@@ -243,7 +240,7 @@ int			switch_routine(char **new_argv, t_data *data);
 /*
 ** pt_env.c
 */
-int			pt_env(char **new_argv);
+int			pt_env(char **new_argv, char *prefix);
 /*
 ** pt_export.c
 */

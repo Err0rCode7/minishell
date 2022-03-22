@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   chk_input.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/22 00:01:42 by taewan            #+#    #+#             */
+/*   Updated: 2022/03/22 00:01:44 by taewan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-void	chk_quote(t_args *args, char chk)
+static void	chk_quote(t_args *args, char chk)
 {
 	if (chk == '\'' && !(args->flag_bq))
 	{
@@ -19,21 +30,21 @@ void	chk_quote(t_args *args, char chk)
 	}
 }
 
-int	is_invld_space(char c)
+static int	is_invld_space(char c)
 {
 	if (c == '\t' || c == '\v' || c == '\f' || c == '\r')
 		return (TRUE);
 	return (FALSE);
 }
 
-void	init_args(t_args *args)
+static void	init_args(t_args *args)
 {
 	args->cnt_space = 0;
 	args->flag_sq = 0;
 	args->flag_bq = 0;
 }
 
-int	chk_is_valid(char *str)
+static int	chk_is_valid(char *str)
 {
 	int		i;
 	t_args	args;
@@ -60,11 +71,11 @@ int	chk_is_valid(char *str)
 
 int	pre_process_input(char *str)
 {
+	add_history(str);
 	if (!(chk_is_valid(str)))
 	{
 		free(str);
 		return (FALSE);
 	}
-	add_history(str);
 	return (TRUE);
 }
