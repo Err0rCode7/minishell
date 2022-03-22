@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/22 13:13:11 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/22 16:08:28 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ int			pt_env(char **new_argv, char *prefix);
 int			pt_export(char ***envp, char **new_argv);
 char		**realloc_env(int env_idx, char ***envp);
 int			get_env_var(char *key, char **envp);
-int			is_redipe(char *str);
+
 /*
 ** prt_image.c
 */
@@ -262,6 +262,8 @@ char		*find_home(char *str, char **envp);
 ** pt_unset.c
 */
 int			pt_unset(char ***envp, char **new_argv);
+int			is_valid_key(char *key);
+
 /*
 ** pt_pwd.c
 */

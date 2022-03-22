@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:18 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:04:56 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 16:18:49 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,22 @@ char	**realloc_env(int env_idx, char ***envp)
 	return (new);
 }
 
-int	is_redipe(char *str)
+static int	validate_key(char *str)
 {
-	if (ft_strncmp(str, ">", 1) == 0)
-		return (TRUE);
-	else if (ft_strncmp(str, "<", 1) == 0)
-		return (TRUE);
-	else if (ft_strncmp(str, "|", 1) == 0)
-		return (TRUE);
-	return (FALSE);
+	int		i;
+	char	*key;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		++i;
+	if (i == 0)
+		return (FALSE);
+	key = ft_strndup(str, i);
+	if (!key)
+		exit(1);
+	i = is_valid_key(key);
+	free(key);
+	return (i);
 }
 
 int	get_env_var(char *key, char **envp)
@@ -97,7 +104,7 @@ int	pt_export(char ***envp, char **new_argv)
 		pt_env(*envp, PREFIX_EXPORT);
 	while (*++new_argv)
 	{
-		if (is_redipe(*new_argv))
+		if (!validate_key(*new_argv))
 		{
 			g_exit_status = 1;
 			prt_cmd_err_shellname(MSG_IDDENTIFIER_ERR, "export", *new_argv);

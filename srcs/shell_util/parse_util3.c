@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_util3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:32 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:10:54 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 15:34:29 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*interprete_dollar_sign(char *str, int *size, char **envp)
 	int		j;
 
 	i = 0;
-	while (str[i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && !ft_isspace(str[i]) && !(str[i] == '=')
+		&& str[i] != '\'' && str[i] != '\"')
 		i++;
 	*size = i;
 	if (i < 2)

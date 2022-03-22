@@ -106,11 +106,8 @@ DIR_OBJ	=	./obj
 DIR_FT	=	./libft
 
 # intel Mac Cluster o readline
-
 DIR_RL	=	/Users/$(USER)/.brew/opt/readline/lib/
 RL_INC	=	/Users/$(USER)/.brew/opt/readline/include/
-
-# RL_INC	=	/goinfre/$(USER)/.brew/opt/readline/include	
 
 # intel Mac Cluster x readline
 # DIR_RL 	=	/usr/local/opt/readline/lib
@@ -137,7 +134,7 @@ VPATH	=	$(DIR_SRC) $(addprefix $(DIR_SRC)/, $(SUBDIRS))
 # ----------------------------------
 
 CC		=	gcc
-CFLAGS	=	-Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS	=	-Werror -Wextra -Wall
 CLIBFMW	=	-L$(DIR_FT) -lft -L$(DIR_RL) -lreadline
 
 # ----------------------------------

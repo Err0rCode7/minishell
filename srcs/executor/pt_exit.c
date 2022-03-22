@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:14 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:01:16 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 15:09:33 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,8 @@ int	print_execute_err_2(char *token1, char *token2, char *err_msg)
 	return (-1);
 }
 
-int	pt_exit(char **cmd)
+static void	process_exit(char **cmd, int cnt)
 {
-	int	cnt;
-
-	g_exit_status = 0;
-	cnt = 0;
-	while (cmd[cnt] != NULL)
-		cnt++;
 	if (cnt == 1)
 		write(STDOUT, "exit\n", 5);
 	else if (cnt == 2 && ft_isdigit_eachstr(cmd[1]))
@@ -67,13 +61,25 @@ int	pt_exit(char **cmd)
 	else if (cnt > 2 && ft_isdigit_eachstr(cmd[1]))
 	{
 		print_execute_err_1("exit", "too many arguments");
-		return (0);
+		return ;
 	}
 	else
 	{
+		write(STDOUT, "exit\n", 5);
 		print_execute_err_2("exit", cmd[1], "numeric argument required");
 		exit(255);
 	}
 	exit(g_exit_status);
+}
+
+int	pt_exit(char **cmd)
+{
+	int	cnt;
+
+	g_exit_status = 0;
+	cnt = 0;
+	while (cmd[cnt] != NULL)
+		cnt++;
+	process_exit(cmd, cnt);
 	return (0);
 }

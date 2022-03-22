@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:15:47 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:15:48 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 14:54:36 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ char	**ft_split_free(char **arr)
 
 	i = 0;
 	if (arr)
+	{
 		while (arr[i])
 			free(arr[i++]);
-	if (!arr)
 		free(arr);
+	}
 	return (NULL);
 }
 
