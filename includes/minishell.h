@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/22 00:59:49 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 13:13:11 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,8 @@ void		prt_image(void);
 ** pt_cd.c
 */
 int			pt_cd(char **argv, t_data *data);
+char		*find_home(char *str, char **envp);
+
 /*
 ** pt_unset.c
 */

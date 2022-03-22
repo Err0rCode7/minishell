@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pt_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:00:57 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 13:12:55 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*find_home(char *str, char **envp)
+char	*find_home(char *str, char **envp)
 {
 	int		i;
 	char	*tmp;
