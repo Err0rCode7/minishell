@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 15:24:37 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:17:30 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	execute(t_binode *tree, t_data *data)
 	}
 	if (tree->type == T_WORD)
 	{
-		tree->data = replace_dollar_sign(tree->data, data->envp);
 		execute_word(tree, data);
 	}
 	execute(tree->left, data);
@@ -84,24 +83,31 @@ void	exec_fork(t_binode *parent, t_data *data)
 void	execute_word(t_binode *parent, t_data *data)
 {
 	char	**new_argv;
-	int		i;
+	// int		i;
 
 	if (!parent->data || !(*parent->data) || str_only_space(parent->data))
 		return ;
-	new_argv = cmd_tokenizer(parent->data);
-	if (!new_argv)
-		exit(1);
-	i = switch_routine(new_argv, data);
-	if (i)
+	
+	// i = switch_routine(new_argv, data);
+	// return ;
+	if (data->pipeflag) // 파이프가 한 번이라도 있을 때
 	{
 		if (data->pipecnt--)
 		{
 			child_process(parent->data, data);
 			data->roe_flag = 0;
-			ft_split_free(new_argv);
 			return ;
 		}
 		exec_fork(parent, data);
 	}
-	ft_split_free(new_argv);
+	else
+	{
+		parent->data = replace_dollar_sign(parent->data, data->envp);
+		new_argv = cmd_tokenizer(parent->data);
+		if (!new_argv)
+			exit(1);
+		if (switch_routine(new_argv, data))
+			exec_fork(parent, data);
+		ft_split_free(new_argv);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:06 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 14:54:37 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:21:14 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*find_pipe(char *str)
 	return (NULL);
 }
 
-char	**split_pipe(char *str)
+char	**split_pipe(char *str, t_data *data)
 {
 	char	*c;
 	char	**tmp;
@@ -49,8 +49,9 @@ char	**split_pipe(char *str)
 		tmp[1] = ft_strdup("");
 		return (tmp);
 	}
-	buf = ft_strndup(str, c - str);
-	tmp[0] = buf;
+	data->pipecnt++;
+	data->pipeflag = TRUE;
+	tmp[0] = ft_strndup(str, c - str);
 	if (*(c + 1))
 		buf = ft_strdup(c + 1);
 	else

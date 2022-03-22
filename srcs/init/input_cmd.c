@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:49 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 01:01:53 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 00:53:45 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,12 @@
 
 char	*get_cmd(char **buf)
 {
-	char	*tmp;
-	char	*prompt;
-
-	tmp = getcwd(0, MAX_DIRLEN);
-	if (tmp == NULL)
-		exit(1);
-	prompt = ft_strjoin(tmp, " $ ");
-	free(tmp);
-	if (!prompt)
-		exit(1);
-	*buf = readline(prompt);
+	*buf = readline("minishell$ ");
+	
 	if (!*buf)
+	{
+		printf("\033[1A\033[10C exit\n");
 		exit(1);
-	free(prompt);
+	}
 	return (*buf);
 }

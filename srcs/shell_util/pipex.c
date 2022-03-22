@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 13:22:16 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/22 22:18:54 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ void	new_process(char *cmd, t_data *data)
 	char	*tmp;
 	int		i;
 
+	g_exit_status = 0;
+	cmd = replace_dollar_sign(cmd, data->envp);	
 	new_argv = cmd_tokenizer(cmd);
 	if (!new_argv)
 		exit(1);
 	if (!*new_argv)
 		exit(127);
+	if (switch_routine(new_argv, data) == 0)
+		exit(g_exit_status);
 	path = find_path(data->envp, new_argv[0]);
 	i = 0;
 	while (new_argv[++i])

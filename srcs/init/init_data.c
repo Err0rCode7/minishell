@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:13:22 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 21:13:25 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,6 @@ void	init_data(t_data *data)
 	data->syntax = STX_OK;
 	data->pipecnt = 0;
 	data->roe_flag = 0;
+	data->wordcnt = 0;
+	data->pipeflag = FALSE;
 }

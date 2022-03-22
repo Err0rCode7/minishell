@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:02:41 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 22:19:19 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	action_parent(int *fd, pid_t *parent, int *exitcode)
 		pt_exit_status(MSG_DUP_TWO_ERR);
 	waitpid(*parent, exitcode, 0);
 	init_signal(handle_signal);
-	g_exit_status = WEXITSTATUS(exitcode);
-	if (WIFSIGNALED(exitcode))
-		g_exit_status = 128 + WTERMSIG(exitcode);
+	g_exit_status = WEXITSTATUS(*exitcode);
+	if (WIFSIGNALED(*exitcode))
+		g_exit_status = 128 + WTERMSIG(*exitcode);
 	close(fd[0]);
 }

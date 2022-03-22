@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 14:55:55 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:13:42 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <termios.h>
 
 void	exec_tree(t_binode *tree, t_data *data)
 {
-	if (data->syntax == STX_ERR)
+	if (data->syntax == STX_ERR || data->wordcnt - data->pipecnt != 1)
 	{
 		prt_error(MSG_GENERAL_SYNTAX_ERR);
 		g_exit_status = 1;
@@ -41,6 +42,10 @@ int	main(int argc, char **argv, char **envp)
 	t_data		data;
 	int			original_fd[2];
 
+	struct termios term;
+    tcgetattr(STDIN_FILENO, &term);
+    term.c_lflag &= ~(ECHOCTL);
+    tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	(void)argc;
 	(void)argv;
 	if (!ft_dup(original_fd))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:53 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 01:03:40 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 00:24:57 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,33 @@ void	handle_signal(int signo)
 {
 	if (signo == SIGINT)
 	{
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putendl_fd("  ", STDOUT);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_exit_status = 130;
+		printf("minishell$ \n");
+		// rl_on_new_line();
+		// rl_redisplay();
+		// ft_putendl_fd("  ", STDOUT);
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
+		// g_exit_status = 130;
 	}
-	else if (signo == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putstr_fd("  \b\b\a", STDOUT);
-	}
+	// else if (signo == SIGQUIT)
+	// {
+	// 	rl_on_new_line();
+	// 	rl_redisplay();
+	// 	ft_putstr_fd("  \b\b\a", STDOUT);
+	// }
+	// else
+	// {
+	// 	printf("exit");
+	// 	rl_on_new_line();
+	// 	rl_replace_line("", 0);
+	// 	rl_redisplay();
+	// }
+	
+    if (rl_on_new_line() == -1)
+        exit(1);
+    rl_replace_line("", 1);
+    rl_redisplay();
 }
 
 void	ignore_sig(int signo)
@@ -53,6 +66,14 @@ void	ignore_signal(void (*handle)(int))
 	signal(SIGINT, ignore_sig);
 	signal(SIGQUIT, ignore_sig);
 }
+
+// void	heredoc_signal(int signo)
+// {
+// 	if (signo == SIGINT)
+// 	{
+// 		exit(0);
+// 	}
+// }
 
 void	init_signal(void (*handler)(int))
 {

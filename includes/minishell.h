@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/22 16:08:28 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:30:15 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ typedef struct s_data
 	char	**envp;
 	int		syntax;
 	int		pipecnt;
+	int		pipeflag;
+	int		wordcnt;
 	int		roe_flag;
 }				t_data;
 
@@ -127,7 +129,7 @@ int			pre_process_input(char *str);
 ** divide_parse.c
 */
 void		divide_pipe(t_binode *parent, t_data *data);
-void		divide_command(t_binode *parent);
+void		divide_command(t_binode *parent, t_data *data);
 void		divide_redirect(t_binode *parent);
 /*
 ** parse_util.c
@@ -148,7 +150,7 @@ int			correct_env(char *env, char *str, int size);
 /*
 ** split_str.c
 */
-char		**split_pipe(char *str);
+char		**split_pipe(char *str, t_data *data);
 char		**split_command(char *str);
 char		**split_redirect(char *str);
 /*
@@ -230,7 +232,7 @@ void		put_buffer(t_buffer *buff, char c, int sw);
 /*
 ** pt_exit.c
 */
-int			pt_exit(char **cmd);
+int			pt_exit(char **cmd, int pipeflag);
 int			print_execute_err_2(char *token1, char *token2, char *err_msg);
 
 /*

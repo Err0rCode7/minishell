@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   divide_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:17 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 14:51:57 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:21:58 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	divide_pipe(t_binode *parent, t_data *data)
 {
 	char	**splited_str;
 
-	splited_str = split_pipe(parent->data);
+	splited_str = split_pipe(parent->data, data);
 	if (!splited_str || !splited_str[0] || !splited_str[1])
 		exit(1);
 	if (**splited_str)
@@ -27,14 +27,13 @@ void	divide_pipe(t_binode *parent, t_data *data)
 	splited_str++;
 	if (**splited_str)
 	{
-		data->pipecnt++;
 		tree_con_binode(parent, \
 		tree_make_binode(*splited_str, T_PIPE), TREE_DIR_RIGHT);
 	}
 	ft_split_free(--splited_str);
 }
 
-void	divide_command(t_binode *parent)
+void	divide_command(t_binode *parent, t_data *data)
 {
 	char	**splited_str;
 
@@ -49,6 +48,7 @@ void	divide_command(t_binode *parent)
 	splited_str++;
 	if (**splited_str)
 	{
+		data->wordcnt++;
 		tree_con_binode(parent, \
 		tree_make_binode(*splited_str, T_WORD), TREE_DIR_RIGHT);
 	}

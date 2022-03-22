@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switch_routine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:34 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:01:37 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/22 21:28:15 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	switch_routine(char **new_argv, t_data *data)
 	if (!*new_argv)
 		return (0);
 	if (ft_strcmp(new_argv[0], "exit") == 0)
-		return (pt_exit(new_argv));
+		return (pt_exit(new_argv, data->pipeflag));
 	if (ft_strcmp(new_argv[0], "cd") == 0)
 		return (pt_cd(new_argv, data));
 	if (ft_strcmp(new_argv[0], "export") == 0)

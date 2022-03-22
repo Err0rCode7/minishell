@@ -106,8 +106,8 @@ DIR_OBJ	=	./obj
 DIR_FT	=	./libft
 
 # intel Mac Cluster o readline
-DIR_RL	=	/Users/$(USER)/.brew/opt/readline/lib/
-RL_INC	=	/Users/$(USER)/.brew/opt/readline/include/
+# DIR_RL	=	/Users/$(USER)/.brew/opt/readline/lib/
+# RL_INC	=	/Users/$(USER)/.brew/opt/readline/include/
 
 # intel Mac Cluster x readline
 # DIR_RL 	=	/usr/local/opt/readline/lib
@@ -118,8 +118,8 @@ RL_INC	=	/Users/$(USER)/.brew/opt/readline/include/
 #RL_INC	=	/usr/include/
 
 # M1 readline
-# DIR_RL = /opt/homebrew/opt/readline/lib
-# RL_INC = /opt/homebrew/opt/readline/include
+DIR_RL = /opt/homebrew/opt/readline/lib
+RL_INC = /opt/homebrew/opt/readline/include
 
 SUBDIRS	=	executor	\
 			init		\

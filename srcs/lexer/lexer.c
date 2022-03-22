@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:59 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 14:59:01 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:12:55 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	divide_str(int divide_kind, t_binode *parent, t_data *data)
 	if (divide_kind == T_PIPE)
 		divide_pipe(parent, data);
 	if (divide_kind == T_COMD)
-		divide_command(parent);
+		divide_command(parent, data);
 	if (divide_kind == T_REDS)
 		divide_redirect(parent);
 	if (divide_kind == T_REDR)
