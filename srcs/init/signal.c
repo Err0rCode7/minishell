@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:53 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:56:38 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 12:35:57 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,21 @@
 void	handle_signal(int signo)
 {
 	if (signo == SIGINT)
-		printf("minishell$ \n");
-	if (rl_on_new_line() == -1)
-		exit(1);
-	rl_replace_line("", 1);
-	rl_redisplay();
-	if (signo == SIGQUIT)
-		printf("  \b\b\a");
+	{
+		rl_on_new_line();
+		rl_redisplay();
+		ft_putendl_fd("  ", STDOUT);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_exit_status = 130;
+	}
+	else if (signo == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+		ft_putstr_fd("  \b\b\a", STDOUT);
+	}
 }
 
 void	ignore_sig(int signo)

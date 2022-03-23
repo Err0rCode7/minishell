@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buffer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:12 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:02:14 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:05:29 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,25 @@ void	flush_buffer(t_buffer *buffer, char **arr)
 	if (*arr == NULL)
 		exit(1);
 	buffer->size = 0;
+}
+
+void	add_new_line_to_buffer(char **buffer, char *str)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	if (!*str)
+		return;
+	tmp = ft_strjoin(*buffer, str);
+	if (tmp == NULL)
+		exit(1);
+	if (*buffer)
+		free(*buffer);
+	if (str)
+		free(str);
+	tmp2 = ft_strjoin(tmp, "\n");
+	if (tmp2 == NULL)
+		exit(1);
+	free(tmp);
+	*buffer = tmp2;
 }

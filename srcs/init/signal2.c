@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_cmd.c                                        :+:      :+:    :+:   */
+/*   signal2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 00:01:49 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 12:24:43 by seujeon          ###   ########.fr       */
+/*   Created: 2022/03/23 15:03:01 by seujeon           #+#    #+#             */
+/*   Updated: 2022/03/23 15:03:14 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_cmd(char **buf)
+void	heredoc_signal(int signo)
 {
-	*buf = readline("minishell$ ");
-	
-	if (!*buf)
+	if (signo == SIGINT)
 	{
-		printf("\033[1A\033[10C exit\n");
+		rl_on_new_line();
+		rl_redisplay();
+		printf("  \n");
 		exit(1);
 	}
-	return (*buf);
+	else if (signo == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+		write(STDOUT, "  \b\b", 4);
+	}
+}
+
+int		handle_endline(char *line)
+{
+	if (line)
+		return (FALSE);
+	write(1, "\033[1A", ft_strlen("\033[1A"));
+	write(1, "\033[2C", ft_strlen("\033[2C"));
+	return (TRUE);
 }

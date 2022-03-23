@@ -6,16 +6,15 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:33:01 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:09:36 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	heredoc_all_signal(int signo)
+static void	ignore_all_signal(int signo)
 {
-	if (signo == SIGINT)
-		printf("\n");
+	(void)signo;
 }
 
 
@@ -24,8 +23,8 @@ void	here_doc(char *limit, t_data *data)
 	pid_t	parent;
 	int		fd[2];
 
-	signal(SIGINT, heredoc_all_signal);
-	signal(SIGQUIT, heredoc_all_signal);
+	signal(SIGINT, ignore_all_signal);
+	signal(SIGQUIT, ignore_all_signal);
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
 	parent = fork();
@@ -39,7 +38,6 @@ void	here_doc(char *limit, t_data *data)
 		if (-1 == dup2(fd[0], STDIN_FILENO))
 			pt_exit_status(MSG_DUP_TWO_ERR);
 		wait(0);
-		init_signal(handle_signal);
 	}
 }
 

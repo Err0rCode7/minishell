@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:48:48 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:08:49 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ void	child_process(char *cmd, t_data *data)
 		action_parent(fd, &parent, &exitcode);
 }
 
-static void	heredoc_signal(int signo)
-{
-	(void)signo;
-}
-
 void	open_fd_with_type(char *redr, char *file, t_data *data)
 {
 	int	fd;
@@ -93,8 +88,6 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 	}
 	else if (!ft_strncmp(redr, "<<", ft_strlen(redr)))
 	{
-		signal(SIGINT, heredoc_signal);
-		signal(SIGQUIT, heredoc_signal);
 		here_doc(file, data);
 		init_signal(handle_signal);
 	}

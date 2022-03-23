@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/22 21:30:15 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:08:15 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,13 @@ void		handle_signal(int signo);
 void		ignore_sig(int signo);
 void		ignore_signal(void (*handler)(int));
 void		init_signal(void (*handler)(int));
+
+/*
+** signal2.c
+*/
+void		heredoc_signal(int signo);
+int			handle_endline(char *line);
+
 /*
 ** input_cmd.c
 */
@@ -210,6 +217,7 @@ void		left_redr(int *fd, char *file, t_data *data);
 */
 int			init_buffer(t_buffer *buffer, size_t size);
 void		flush_buffer(t_buffer *buffer, char **arr);
+void		add_new_line_to_buffer(char **buffer, char *str);
 /*
 ** replace_dollar_sign.c
 */

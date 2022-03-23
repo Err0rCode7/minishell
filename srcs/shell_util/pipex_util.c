@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 12:08:55 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:09:20 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,6 @@ char	*find_path(char **envp, char *cmd)
 	return (NULL);
 }
 
-void	heredoc_signal(int signo)
-{
-	if (signo == SIGINT)
-	{
-		rl_on_new_line();
-		printf("\033[1A\033[1D>   \n");
-		exit(1);
-	}
-}
-
-int		handle_endline(char *line)
-{
-	if (line)
-		return (FALSE);
-	printf("  \033[2D");
-	return (TRUE);
-}
-
 void	here_doc_child(int *fd, char *limit, t_data *data)
 {
 	char	*line;
@@ -112,19 +94,14 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	buffer = NULL;
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
-		if (handle_endline(line) || ft_strncmp(line, limit, ft_strlen(limit)) == 0) {
-			write(fd[1], buffer, ft_strlen(buffer));
+		line = readline("> ");
+		if (handle_endline(line) || ft_strncmp(line, limit, ft_strlen(limit)) == 0)
+		{
+			if (buffer != NULL)
+				write(fd[1], buffer, ft_strlen(buffer));
 			exit(EXIT_SUCCESS);
 		}
 		str = replace_dollar_sign(line, data->envp);
-		line = ft_strjoin(buffer, str);
-		if (buffer)
-			free(buffer);
-		buffer = line;
-		if (str)
-			free(str);
-		
+		add_new_line_to_buffer(&buffer, str);
 	}
 }
