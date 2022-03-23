@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 00:57:58 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:32:49 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,36 +85,34 @@ char	*find_path(char **envp, char *cmd)
 void	heredoc_signal(int signo)
 {
 	if (signo == SIGINT)
-	{
-		// rl_on_new_line();
-		rl_replace_line("", 0);
-		printf("\033[1A              \n");
 		exit(1);
-	}
-	else
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-	}
 }
 
 void	here_doc_child(int *fd, char *limit, t_data *data)
 {
 	char	*line;
 	char	*str;
+	char	*buffer;
 
 	signal(SIGINT, heredoc_signal);
 	signal(SIGQUIT, heredoc_signal);
 	close(fd[0]);
+	buffer = NULL;
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
-		// line = readline("> ");
-		if (ft_strncmp(line, limit, ft_strlen(limit)) == 0)
+		if (line == NULL || ft_strncmp(line, limit, ft_strlen(limit)) == 0) {
+			write(fd[1], buffer, ft_strlen(buffer));
 			exit(EXIT_SUCCESS);
+		}
 		str = replace_dollar_sign(line, data->envp);
-		write(fd[1], str, ft_strlen(str));
-		free(str);
+		line = ft_strjoin(buffer, str);
+		if (buffer)
+			free(buffer);
+		buffer = line;
+		if (str)
+			free(str);
+		
 	}
 }
