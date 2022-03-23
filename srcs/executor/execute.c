@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 02:34:32 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:15:17 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,10 @@ void	exec_fork(t_binode *parent, t_data *data)
 void	execute_word(t_binode *parent, t_data *data)
 {
 	char	**new_argv;
-	// int		i;
 
 	if (!parent->data || !(*parent->data) || str_only_space(parent->data))
 		return ;
-	
-	// i = switch_routine(new_argv, data);
-	// return ;
-	if (data->pipeflag) // 파이프가 한 번이라도 있을 때
+	if (data->pipeflag)
 	{
 		if (data->pipecnt--)
 		{

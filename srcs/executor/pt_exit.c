@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:14 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 22:46:57 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:23:45 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_isdigit_eachstr(char *str)
 {
 	int	idx;
-	int sign;
+	int	sign;
 
 	idx = 0;
 	sign = 0;
@@ -33,38 +33,8 @@ static int	ft_isdigit_eachstr(char *str)
 	if ((str[0] == '+' && (ft_strcmp(str, "+9223372036854775807") > 0))
 		|| (str[0] == '-' && (ft_strcmp(str, "-9223372036854775808") > 0))
 		|| (!sign && ft_strcmp(str, "9223372036854775807") > 0))
-		return (FALSE);	
+		return (FALSE);
 	return (TRUE);
-}
-
-static void print_pipe_exit(int pipeflag)
-{
-	if (pipeflag)
-		return ;
-	write(STDOUT, "exit\n", 5);
-}
-
-static int	print_execute_err_1(char *token, char *err_msg, int pipeflag)
-{
-	print_pipe_exit(pipeflag);
-	ft_putstr_fd("minishell", STDERR);
-	ft_putstr_fd(": ", STDERR);
-	ft_putstr_fd(token, STDERR);
-	ft_putstr_fd(": ", STDERR);
-	ft_putendl_fd(err_msg, STDERR);
-	return (-1);
-}
-
-int	print_execute_err_2(char *token1, char *token2, char *err_msg)
-{
-	ft_putstr_fd("minishell", STDERR);
-	ft_putstr_fd(": ", STDERR);
-	ft_putstr_fd(token1, STDERR);
-	ft_putstr_fd(": ", STDERR);
-	ft_putstr_fd(token2, STDERR);
-	ft_putstr_fd(": ", STDERR);
-	ft_putendl_fd(err_msg, STDERR);
-	return (-1);
 }
 
 static void	process_exit(char **cmd, int cnt, int pipeflag)

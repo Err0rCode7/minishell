@@ -6,18 +6,34 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:08:49 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:25:49 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	set_home(char **new_argv, t_data *data)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (new_argv[++i])
+	{
+		if (ft_strncmp(new_argv[i], "~", 1) != 0)
+			continue ;
+		tmp = find_home(new_argv[i], data->envp);
+		if (!tmp)
+			exit(1);
+		free(new_argv[i]);
+		new_argv[i] = tmp;
+	}
+}
+
 void	new_process(char *cmd, t_data *data)
 {
 	char	**new_argv;
 	char	*path;
-	char	*tmp;
-	int		i;
 
 	g_exit_status = 0;
 	cmd = replace_dollar_sign(cmd, data->envp);
@@ -29,15 +45,7 @@ void	new_process(char *cmd, t_data *data)
 	if (switch_routine(new_argv, data) == 0)
 		exit(g_exit_status);
 	path = find_path(data->envp, new_argv[0]);
-	i = 0;
-	while (new_argv[++i])
-	{
-		if (ft_strncmp(new_argv[i], "~", 1) != 0)
-			continue ;
-		tmp = find_home(new_argv[i], data->envp);
-		free(new_argv[i]);
-		new_argv[i] = tmp;
-	}
+	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
 	{
 		prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL);

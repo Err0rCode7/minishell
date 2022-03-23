@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/23 15:08:15 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:25:11 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,6 @@ void		put_buffer(t_buffer *buff, char c, int sw);
 ** pt_exit.c
 */
 int			pt_exit(char **cmd, int pipeflag);
-int			print_execute_err_2(char *token1, char *token2, char *err_msg);
 
 /*
 ** executor/switch_routine.c
@@ -286,5 +285,8 @@ int			pt_echo(char **new_argv);
 ** pt_exit_status.c
 */
 int			pt_exit_status(char *str);
+void		print_pipe_exit(int pipeflag);
+int			print_execute_err_2(char *token1, char *token2, char *err_msg);
+int			print_execute_err_1(char *token, char *err_msg, int pipeflag);
 
 #endif

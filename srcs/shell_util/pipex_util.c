@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:09:20 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:21:30 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
-		if (handle_endline(line) || ft_strncmp(line, limit, ft_strlen(limit)) == 0)
+		if (handle_endline(line)
+			|| ft_strncmp(line, limit, ft_strlen(limit)) == 0)
 		{
 			if (buffer != NULL)
 				write(fd[1], buffer, ft_strlen(buffer));

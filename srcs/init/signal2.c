@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:03:01 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/23 15:03:14 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:13:56 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	heredoc_signal(int signo)
 	}
 }
 
-int		handle_endline(char *line)
+int	handle_endline(char *line)
 {
 	if (line)
 		return (FALSE);

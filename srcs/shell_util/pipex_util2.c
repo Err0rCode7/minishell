@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:09:36 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:15:43 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	ignore_all_signal(int signo)
 {
 	(void)signo;
 }
-
 
 void	here_doc(char *limit, t_data *data)
 {
