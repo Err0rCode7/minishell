@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 22:18:54 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:08:14 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	new_process(char *cmd, t_data *data)
 	int		i;
 
 	g_exit_status = 0;
-	cmd = replace_dollar_sign(cmd, data->envp);	
+	cmd = replace_dollar_sign(cmd, data->envp);
 	new_argv = cmd_tokenizer(cmd);
 	if (!new_argv)
 		exit(1);
@@ -68,6 +68,15 @@ void	child_process(char *cmd, t_data *data)
 		action_parent(fd, &parent, &exitcode);
 }
 
+static void	heredoc_signal(int signo)
+{
+	(void)signo;
+	// if (signo == SIGINT)
+	// {
+	// 	printf("\n");
+	// }
+}
+
 void	open_fd_with_type(char *redr, char *file, t_data *data)
 {
 	int	fd;
@@ -87,7 +96,12 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 			pt_exit_status(MSG_DUP_TWO_ERR);
 	}
 	else if (!ft_strncmp(redr, "<<", ft_strlen(redr)))
+	{
+		signal(SIGINT, heredoc_signal);
+		signal(SIGQUIT, heredoc_signal);
 		here_doc(file, data);
+		init_signal(handle_signal);
+	}
 	else
 		pt_exit_status(MSG_OPEN_FD_WITH_TYPE_ERR);
 }

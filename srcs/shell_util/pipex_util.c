@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 00:57:58 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:06:30 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,8 @@ void	heredoc_signal(int signo)
 {
 	if (signo == SIGINT)
 	{
-		// rl_on_new_line();
-		rl_replace_line("", 0);
-		printf("\033[1A              \n");
+		printf("\n");
 		exit(1);
-	}
-	else
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
 	}
 }
 
@@ -110,7 +103,6 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
-		// line = readline("> ");
 		if (ft_strncmp(line, limit, ft_strlen(limit)) == 0)
 			exit(EXIT_SUCCESS);
 		str = replace_dollar_sign(line, data->envp);
