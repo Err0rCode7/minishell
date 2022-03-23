@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 00:13:42 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:07:21 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <termios.h>
 
 void	exec_tree(t_binode *tree, t_data *data)
 {
@@ -42,10 +41,6 @@ int	main(int argc, char **argv, char **envp)
 	t_data		data;
 	int			original_fd[2];
 
-	struct termios term;
-    tcgetattr(STDIN_FILENO, &term);
-    term.c_lflag &= ~(ECHOCTL);
-    tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	(void)argc;
 	(void)argv;
 	if (!ft_dup(original_fd))

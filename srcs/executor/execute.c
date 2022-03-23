@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 22:17:30 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 02:34:32 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	execute(t_binode *tree, t_data *data)
 		execute_redr(tree, data);
 	}
 	if (tree->type == T_WORD)
-	{
 		execute_word(tree, data);
-	}
 	execute(tree->left, data);
 	execute(tree->right, data);
 }

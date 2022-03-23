@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
 /*   Updated: 2022/03/23 11:32:49 by seujeon          ###   ########.fr       */
