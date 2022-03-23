@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:58:39 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 12:08:55 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,14 @@ void	heredoc_signal(int signo)
 	}
 }
 
+int		handle_endline(char *line)
+{
+	if (line)
+		return (FALSE);
+	printf("  \033[2D");
+	return (TRUE);
+}
+
 void	here_doc_child(int *fd, char *limit, t_data *data)
 {
 	char	*line;
@@ -106,7 +114,7 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
-		if (line == NULL || ft_strncmp(line, limit, ft_strlen(limit)) == 0) {
+		if (handle_endline(line) || ft_strncmp(line, limit, ft_strlen(limit)) == 0) {
 			write(fd[1], buffer, ft_strlen(buffer));
 			exit(EXIT_SUCCESS);
 		}
