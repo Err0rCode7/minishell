@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:53 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 01:33:35 by taewan           ###   ########.fr       */
+/*   Updated: 2022/03/23 11:56:38 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	handle_signal(int signo)
 		exit(1);
 	rl_replace_line("", 1);
 	rl_redisplay();
+	if (signo == SIGQUIT)
+		printf("  \b\b\a");
 }
 
 void	ignore_sig(int signo)

@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:32:49 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:58:39 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ char	*find_path(char **envp, char *cmd)
 void	heredoc_signal(int signo)
 {
 	if (signo == SIGINT)
+	{
+		rl_on_new_line();
+		printf("\033[1A\033[1D>   \n");
 		exit(1);
+	}
 }
 
 void	here_doc_child(int *fd, char *limit, t_data *data)

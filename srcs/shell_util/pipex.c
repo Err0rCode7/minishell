@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:16:45 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:48:48 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,6 @@ void	child_process(char *cmd, t_data *data)
 static void	heredoc_signal(int signo)
 {
 	(void)signo;
-	// if (signo == SIGINT)
-	// {
-	// 	printf("\n");
-	// }
 }
 
 void	open_fd_with_type(char *redr, char *file, t_data *data)
