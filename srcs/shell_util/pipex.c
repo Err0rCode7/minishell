@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:25:49 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:30:26 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	child_process(char *cmd, t_data *data)
 {
 	pid_t	parent;
 	int		fd[2];
-	int		exitcode;
 
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
@@ -68,12 +67,13 @@ void	child_process(char *cmd, t_data *data)
 	else if (!parent)
 	{
 		close(fd[0]);
-		if (-1 == dup2(fd[1], STDOUT_FILENO))
-			error_exit(MSG_DUP_TWO_ERR, EXIT_FAILURE);
+		if (!data->tmp)
+			if (-1 == dup2(fd[1], STDOUT_FILENO))
+				error_exit(MSG_DUP_TWO_ERR, EXIT_FAILURE);
 		new_process(cmd, data);
 	}
 	else
-		action_parent(fd, &parent, &exitcode);
+		action_parent(fd);
 }
 
 void	open_fd_with_type(char *redr, char *file, t_data *data)

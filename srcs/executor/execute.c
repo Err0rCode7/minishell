@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:15:17 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 11:44:46 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	str_only_space(char *str)
 void	exec_fork(t_binode *parent, t_data *data)
 {
 	pid_t	pid;
-	int		exitcode;
 
 	ignore_signal(ignore_sig);
 	pid = fork();
@@ -69,13 +68,7 @@ void	exec_fork(t_binode *parent, t_data *data)
 	if (!pid)
 		new_process(parent->data, data);
 	else
-	{
-		waitpid(pid, &exitcode, 0);
 		init_signal(handle_signal);
-		g_exit_status = WEXITSTATUS(exitcode);
-		if (WIFSIGNALED(exitcode))
-			g_exit_status = 128 + WTERMSIG(exitcode);
-	}
 }
 
 void	execute_word(t_binode *parent, t_data *data)
@@ -86,13 +79,12 @@ void	execute_word(t_binode *parent, t_data *data)
 		return ;
 	if (data->pipeflag)
 	{
-		if (data->pipecnt--)
-		{
-			child_process(parent->data, data);
-			data->roe_flag = 0;
-			return ;
-		}
-		exec_fork(parent, data);
+		data->pipecnt--;
+		data->tmp = 0;
+		if (data->pipecnt == -1)
+			data->tmp = 1;
+		child_process(parent->data, data);
+		data->roe_flag = 0;
 	}
 	else
 	{

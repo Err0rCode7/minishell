@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 11:07:21 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/03 11:49:50 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	t_binode	*tree;
 	t_data		data;
 	int			original_fd[2];
+	int			status;
 
 	(void)argc;
 	(void)argv;
@@ -53,6 +54,9 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		tree = parsetree(buf, &data);
 		exec_tree(tree, &data);
+		//수정 필요
+		while (wait(&status) != -1);
+		init_signal(handle_signal);
 		free(buf);
 		dup2(original_fd[0], STDIN_FILENO);
 		dup2(original_fd[1], STDOUT_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:15:43 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 11:47:48 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,10 @@ void	right_redr(int *fd, char *file, t_data *data)
 		close(*fd);
 }
 
-void	action_parent(int *fd, pid_t *parent, int *exitcode)
+void	action_parent(int *fd)
 {
 	close(fd[1]);
 	if (-1 == dup2(fd[0], STDIN_FILENO))
 		pt_exit_status(MSG_DUP_TWO_ERR);
-	waitpid(*parent, exitcode, 0);
-	init_signal(handle_signal);
-	g_exit_status = WEXITSTATUS(*exitcode);
-	if (WIFSIGNALED(*exitcode))
-		g_exit_status = 128 + WTERMSIG(*exitcode);
 	close(fd[0]);
 }

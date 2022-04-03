@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/23 15:25:11 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:27:45 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_data
 	int		pipeflag;
 	int		wordcnt;
 	int		roe_flag;
+	int		tmp;
 }				t_data;
 
 typedef struct s_fdargs
@@ -208,7 +209,7 @@ void		open_fd_with_type(char *redr, char *file, t_data *data);
 ** pipex_util2.c
 */
 void		here_doc(char *limit, t_data *data);
-void		action_parent(int *fd, pid_t *parent, int *exitcode);
+void		action_parent(int *fd);
 void		right_redr(int *fd, char *file, t_data *data);
 void		left_redr(int *fd, char *file, t_data *data);
 
