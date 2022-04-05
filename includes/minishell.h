@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/02 23:27:45 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/05 22:41:14 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,13 +250,14 @@ int			switch_routine(char **new_argv, t_data *data);
 /*
 ** pt_env.c
 */
-int			pt_env(char **new_argv, char *prefix);
+int			pt_env(char **envp, char *prefix, char **new_argv);
 /*
 ** pt_export.c
 */
 int			pt_export(char ***envp, char **new_argv);
 char		**realloc_env(int env_idx, char ***envp);
 int			get_env_var(char *key, char **envp);
+void		add_env(char ***envp, char *new_argv);
 
 /*
 ** prt_image.c
@@ -289,5 +290,6 @@ int			pt_exit_status(char *str);
 void		print_pipe_exit(int pipeflag);
 int			print_execute_err_2(char *token1, char *token2, char *err_msg);
 int			print_execute_err_1(char *token, char *err_msg, int pipeflag);
+int			print_execute_err_3(char *head, char *token, char *err_msg);
 
 #endif
