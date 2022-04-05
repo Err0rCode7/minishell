@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:21 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:02:22 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/05 23:23:18 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg)
 		write(2, "\': ", 3);
 	}
 	write(2, msg, ft_strlen(msg));
-	write(1, "\n", 1);
+	write(2, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:21:30 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 22:55:44 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	**split_path(char **envp)
 	if (!envp[i])
 		return (NULL);
 	arr = ft_split(envp[i] + 5, ':');
+	if (!arr)
+		exit(1);
 	return (arr);
 }
 

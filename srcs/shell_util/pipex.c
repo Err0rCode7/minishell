@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/02 23:30:26 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/05 23:36:58 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	new_process(char *cmd, t_data *data)
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
 	{
-		prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL);
+		if (!split_path(data->envp))
+			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL);
+		else
+			prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL);
 		exit(127);
 	}
 }

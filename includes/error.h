@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:54 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/22 00:03:37 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/05 23:02:30 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MSG_PIPE_ERR	"Pipe Error"
 # define MSG_OPEN_FD_WITH_TYPE_ERR	"Function : open_fd_with_type Error"
 # define MSG_CMD_NOT_FOUND_ERR	"command not found"
+# define MSG_HOME_NOT_FOUND_ERR	"HOME not set"
 
 # define STX_ERR		0
 # define STX_OK			1
