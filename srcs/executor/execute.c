@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/03 11:44:46 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/07 02:40:54 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	exec_fork(t_binode *parent, t_data *data)
 		pt_exit_status(MSG_FORK_ERR);
 	if (!pid)
 		new_process(parent->data, data);
-	else
-		init_signal(handle_signal);
 }
 
 void	execute_word(t_binode *parent, t_data *data)
