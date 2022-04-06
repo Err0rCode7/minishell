@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:18 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 16:18:49 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/05 22:29:13 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	get_env_var(char *key, char **envp)
 
 	i = -1;
 	tmp = ft_strjoin(key, "=");
+	if (!tmp)
+		exit(1);
 	while (envp[++i])
 	{
 		if (!ft_strncmp(envp[i], tmp, ft_strlen(tmp)))
@@ -71,7 +73,7 @@ int	get_env_var(char *key, char **envp)
 	return (i);
 }
 
-static void	add_env(char ***envp, char *new_argv)
+void	add_env(char ***envp, char *new_argv)
 {
 	char	*i;
 	char	*key;
@@ -101,7 +103,7 @@ int	pt_export(char ***envp, char **new_argv)
 	while (new_argv[i])
 		i++;
 	if (i == 1)
-		pt_env(*envp, PREFIX_EXPORT);
+		pt_env(*envp, PREFIX_EXPORT, new_argv);
 	while (*++new_argv)
 	{
 		if (!validate_key(*new_argv))
