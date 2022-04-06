@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:25:19 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 22:40:50 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ int	print_execute_err_2(char *token1, char *token2, char *err_msg)
 	ft_putstr_fd(token1, STDERR);
 	ft_putstr_fd(": ", STDERR);
 	ft_putstr_fd(token2, STDERR);
+	ft_putstr_fd(": ", STDERR);
+	ft_putendl_fd(err_msg, STDERR);
+	return (-1);
+}
+
+int	print_execute_err_3(char *head, char *token, char *err_msg)
+{
+	ft_putstr_fd(head, STDERR);
+	ft_putstr_fd(": ", STDERR);
+	ft_putstr_fd(token, STDERR);
 	ft_putstr_fd(": ", STDERR);
 	ft_putendl_fd(err_msg, STDERR);
 	return (-1);

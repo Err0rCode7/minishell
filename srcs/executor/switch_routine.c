@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:34 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 21:28:15 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 22:14:47 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	switch_routine(char **new_argv, t_data *data)
 	if (ft_strcmp(new_argv[0], "unset") == 0)
 		return (pt_unset(&data->envp, new_argv));
 	if (ft_strcmp(new_argv[0], "env") == 0)
-		return (pt_env(data->envp, ""));
+		return (pt_env(data->envp, "", new_argv));
 	if (ft_strcmp(new_argv[0], "pwd") == 0)
 		return (pt_pwd());
 	if (ft_strcmp(new_argv[0], "echo") == 0)
