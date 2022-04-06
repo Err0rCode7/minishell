@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:06 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/06 21:09:44 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:51:32 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ void	add_key_value(char ***envp, char *value, char *key)
 	char	*buf;
 	char	*tmp;
 
-	if (!ft_strncmp("echo", value, 4))
-		return ;
 	if (check_invalid_arg_null(key, value))
 		return ;
+	if (!ft_strncmp("echo", value, 4))
+	{
+		free(value);
+		free(key);
+		return ;
+	}
 	tmp = ft_strjoin(key, "=");
 	free(key);
 	buf = ft_strjoin(tmp, value);
+	free(value);
 	free(tmp);
 	add_env(envp, buf);
 	free(buf);
