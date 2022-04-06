@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/05 22:41:14 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 23:21:08 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_data
 	int		wordcnt;
 	int		roe_flag;
 	int		tmp;
+	char	*home;
 }				t_data;
 
 typedef struct s_fdargs

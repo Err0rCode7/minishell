@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:21:07 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 23:11:48 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,24 @@ int	pt_cd(char **argv, t_data *data)
 	if (!chdir(argv[1]))
 		return (0);
 	path = find_home(argv[1], data->envp);
-	if (!path)
-		exit(1);
-	if ((!argv[1] || !ft_strncmp(argv[1], "~", 1)
-			|| !ft_strncmp(argv[1], "~/", 2)) && !chdir(path))
+	if (!argv[1])
+	{
+		if (chdir(path))
+		{
+			prt_cmd_err_shellname(MSG_HOME_NOT_FOUND_ERR, argv[0], NULL);
+			g_exit_status = 1;
+		}
+		free(path);
+		return (0);
+	}
+	if ((!ft_strncmp(argv[1], "~", 1) || !ft_strncmp(argv[1], "~/", 2))
+		&& !chdir(data->home))
 	{
 		free(path);
 		return (0);
 	}
-	free(path);
+	if (path)
+		free(path);
 	g_exit_status = 1;
 	print_execute_err_2(argv[0], argv[1], MSG_FILE_NOT_FOUND_ERR);
 	return (0);

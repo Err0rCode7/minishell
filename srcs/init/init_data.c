@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 21:13:25 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 23:21:05 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_set(t_data *data, char **envp)
 	init_signal(handle_signal);
 	prt_image();
 	data->envp = dup_envp(envp);
+	data->home = find_home("", envp);
 }
 
 void	init_data(t_data *data)
@@ -55,4 +56,5 @@ void	init_data(t_data *data)
 	data->roe_flag = 0;
 	data->wordcnt = 0;
 	data->pipeflag = FALSE;
+	data->tmp = 0;
 }
