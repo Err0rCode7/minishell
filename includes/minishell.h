@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/06 20:35:23 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 02:19:52 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ int			pt_env(char **envp, char *prefix, char **new_argv);
 ** pt_env2.c
 */
 void		add_key_value(char ***envp, char *value, char *key);
+char		*get_last(char **arr);
 /*
 ** pt_export.c
 */

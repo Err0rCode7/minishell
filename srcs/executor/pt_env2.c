@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:06 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/07 00:51:32 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 02:19:48 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ static int	check_invalid_arg_null(char *key, char *value)
 		return (1);
 	}
 	return (0);
+}
+
+char	*get_last(char **arr)
+{
+	if (!*arr)
+		return NULL;
+	while (*arr)
+		arr++;
+	return *(arr - 1);
 }
 
 void	add_key_value(char ***envp, char *value, char *key)

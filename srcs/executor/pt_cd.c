@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/06 20:54:39 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 02:28:55 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ char	*find_home(char *str, char **envp)
 	return (arr);
 }
 
-int	check_oldpwd(char **argv, t_data *data)
+int	check_oldpwd(char **argv, t_data *data, int *is_oldpwd)
 {
 	char	**envp;
+
+	*is_oldpwd = FALSE;
 	if (argv[1] && ft_strcmp(argv[1], "-") == 0)
 	{
 		envp = data->envp + get_env_var("OLDPWD", data->envp);
@@ -51,12 +53,13 @@ int	check_oldpwd(char **argv, t_data *data)
 			return (1);
 		}
 		free(argv[1]);
+		*is_oldpwd = TRUE;
 		argv[1] = ft_strdup(*envp + 7);
 	}
 	return (0);
 }
 
-int	set_pwd(t_data *data, char *oldpwd)
+int	set_pwd(t_data *data, char *oldpwd, int is_oldpwd)
 {
 	char	*tmp;
 
@@ -69,6 +72,8 @@ int	set_pwd(t_data *data, char *oldpwd)
 	oldpwd = getcwd(0, MAX_DIRLEN);
 	if (!oldpwd)
 		exit(1);
+	if (is_oldpwd)
+		printf("%s\n", oldpwd);
 	tmp = ft_strjoin("PWD=", oldpwd);
 	add_env(&data->envp, tmp);
 	free(oldpwd);
@@ -76,7 +81,7 @@ int	set_pwd(t_data *data, char *oldpwd)
 	return (0);
 }
 
-int	check_to_home(char **argv, t_data *data, char *oldpwd)
+int	check_to_home(char **argv, t_data *data, char *oldpwd, int is_oldpwd)
 {
 	char	*path;
 
@@ -89,13 +94,13 @@ int	check_to_home(char **argv, t_data *data, char *oldpwd)
 			g_exit_status = 1;
 		}
 		free(path);
-		return (set_pwd(data, oldpwd));
+		return (set_pwd(data, oldpwd, is_oldpwd));
 	}
 	if ((!ft_strncmp(argv[1], "~", 1) || !ft_strncmp(argv[1], "~/", 2))
 		&& !chdir(data->home))
 	{
 		free(path);
-		return (set_pwd(data, oldpwd));
+		return (set_pwd(data, oldpwd, is_oldpwd));
 	}
 	if (path)
 		free(path);
@@ -105,16 +110,17 @@ int	check_to_home(char **argv, t_data *data, char *oldpwd)
 int	pt_cd(char **argv, t_data *data)
 {
 	char	*oldpwd;
+	int		is_oldpwd;
 
 	g_exit_status = 0;
-	if (check_oldpwd(argv, data))
+	if (check_oldpwd(argv, data, &is_oldpwd))
 		return (0);
 	oldpwd = getcwd(0, MAX_DIRLEN);
 	if (!oldpwd)
 		exit(1);
 	if (!chdir(argv[1]))
-		return (set_pwd(data, oldpwd));
-	if (!check_to_home(argv, data, oldpwd))
+		return (set_pwd(data, oldpwd, is_oldpwd));
+	if (!check_to_home(argv, data, oldpwd, is_oldpwd))
 		return (0);
 	free(oldpwd);
 	g_exit_status = 1;
