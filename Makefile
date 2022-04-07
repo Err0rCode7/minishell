@@ -73,6 +73,7 @@ SRCS	+=	signal.c				\
 			signal2.c				\
 			input_cmd.c				\
 			chk_input.c				\
+			chk_input2.c				\
 			init_data.c
 
 # lexer

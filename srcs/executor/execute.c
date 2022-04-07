@@ -67,8 +67,6 @@ void	exec_fork(t_binode *parent, t_data *data)
 		pt_exit_status(MSG_FORK_ERR);
 	if (!pid)
 		new_process(parent->data, data);
-	else
-		init_signal(handle_signal);
 }
 
 void	execute_word(t_binode *parent, t_data *data)

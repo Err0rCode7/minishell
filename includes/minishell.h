@@ -133,7 +133,11 @@ char		*get_cmd(char **buf);
 /*
 ** chk_input.c
 */
-int			pre_process_input(char *str);
+int			pre_process_input(char **str);
+/*
+** chk_input2.c
+*/
+void		process_escape(char **str);
 /*
 ** divide_parse.c
 */

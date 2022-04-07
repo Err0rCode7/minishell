@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chk_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:01:44 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/07 03:13:53 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,20 @@ static int	chk_is_valid(char *str)
 		return (FALSE);
 	if (args.flag_sq || args.flag_bq)
 	{
-		ft_putstr_fd(MSG_QUOTE_ERR, STDERR);
+		ft_putendl_fd(MSG_QUOTE_ERR, STDERR);
 		return (FALSE);
 	}
 	return (TRUE);
 }
 
-int	pre_process_input(char *str)
+int	pre_process_input(char **str)
 {
-	add_history(str);
-	if (!(chk_is_valid(str)))
+	add_history(*str);
+	process_escape(str);
+	if (!(chk_is_valid(*str)))
 	{
-		free(str);
+		free(*str);
+		g_exit_status = 1;
 		return (FALSE);
 	}
 	return (TRUE);
