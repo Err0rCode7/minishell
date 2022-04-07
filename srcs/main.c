@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/07 02:56:23 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:02:05 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	exec_tree(t_binode *tree, t_data *data)
 	{
 		prt_error(MSG_GENERAL_SYNTAX_ERR);
 		g_exit_status = 1;
+		if (data->syntax == STX_ERR)
+			g_exit_status = 258;
 	}
 	else
 		execute(tree, data);
