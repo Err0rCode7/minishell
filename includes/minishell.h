@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/05 23:21:08 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 02:58:35 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,11 @@ char		*get_cmd(char **buf);
 /*
 ** chk_input.c
 */
-int			pre_process_input(char *str);
+int			pre_process_input(char **str);
+/*
+** chk_input2.c
+*/
+void		process_escape(char **str);
 /*
 ** divide_parse.c
 */
