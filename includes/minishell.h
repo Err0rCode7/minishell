@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/07 02:19:52 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 11:13:24 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
+# include <sys/stat.h>
 
 # include "libft.h"
 # include "tree.h"
@@ -185,6 +187,7 @@ t_binode	*parsetree(char *str, t_data *data);
 void		here_doc_child(int *fd, char *limit, t_data *data);
 char		*find_path(char **envp, char *cmd);
 char		**split_path(char **envp);
+int			ft_access(char *file, int option);
 
 /*
 ** init_data.c

@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/07 01:15:37 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 12:01:54 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,37 @@ void	set_home(char **new_argv, t_data *data)
 	}
 }
 
+int		ft_dir_access(char *name)
+{
+	DIR *tmp;
+
+	tmp = opendir(name);
+	if (tmp != NULL)
+	{
+		closedir(tmp);
+		return (1);
+	}
+	return (0);
+}
+
+int		ft_is_dir(char *name)
+{
+	struct stat buf;
+
+	stat(name, &buf);
+	return (S_ISDIR(buf.st_mode));
+}
+
+int		ft_access2(char *name, int option)
+{
+	struct stat buf;
+
+	stat(name, &buf);
+	return ((buf.st_mode & option) != 0
+	|| (buf.st_mode & (option >> 3)) != 0
+	|| (buf.st_mode & (option >> 6)) != 0);
+}
+
 void	new_process(char *cmd, t_data *data)
 {
 	char	**new_argv;
@@ -51,6 +82,18 @@ void	new_process(char *cmd, t_data *data)
 		if (!split_path(data->envp) || !ft_strncmp(new_argv[0], "./", 2)
 		|| !ft_strncmp(new_argv[0], "/", 1))
 			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL);
+		else if (ft_is_dir(path))
+		{
+			prt_cmd_err_shellname(MSG_DIR_ERR, new_argv[0], NULL);
+			exit(126);
+		}
+		else if (ft_access2(path, S_IREAD) && !ft_access2(path, S_IEXEC))
+		{
+			prt_cmd_err_shellname(MSG_PERMISSION_ERR, new_argv[0], NULL);
+			exit(126);
+		}
+		else if (ft_access2(path, S_IEXEC))
+			exit(0);
 		else
 			prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL);
 		exit(127);
@@ -61,6 +104,7 @@ void	child_process(char *cmd, t_data *data)
 {
 	pid_t	parent;
 	int		fd[2];
+	int		status;
 
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
@@ -77,7 +121,16 @@ void	child_process(char *cmd, t_data *data)
 		new_process(cmd, data);
 	}
 	else
+	{
 		action_parent(fd);
+		if (data->tmp)
+		{
+			waitpid(parent, &status, 0);
+			g_exit_status = WEXITSTATUS(status);
+			if (WIFSIGNALED(status))
+				g_exit_status = 128 + WTERMSIG(status);
+		}
+	}
 }
 
 void	open_fd_with_type(char *redr, char *file, t_data *data)

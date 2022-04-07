@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/07 02:18:50 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 10:06:45 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	str_only_space(char *str)
 void	exec_fork(t_binode *parent, t_data *data)
 {
 	pid_t	pid;
+	int		status;
 
 	ignore_signal(ignore_sig);
 	pid = fork();
@@ -67,6 +68,13 @@ void	exec_fork(t_binode *parent, t_data *data)
 		pt_exit_status(MSG_FORK_ERR);
 	if (!pid)
 		new_process(parent->data, data);
+	else
+	{
+		waitpid(pid, &status, 0);
+		g_exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+			g_exit_status = 128 + WTERMSIG(status);
+	}
 }
 
 void	execute_word(t_binode *parent, t_data *data)
