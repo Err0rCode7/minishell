@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 22:55:44 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 10:48:54 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**split_path(char **envp)
 	return (arr);
 }
 
-static int	ft_access(char *file, int option)
+int		ft_access(char *file, int option)
 {
 	int	fd;
 
