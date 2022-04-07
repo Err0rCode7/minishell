@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 23:36:58 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 10:16:20 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	child_process(char *cmd, t_data *data)
 {
 	pid_t	parent;
 	int		fd[2];
+	int		status;
 
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
@@ -76,7 +77,16 @@ void	child_process(char *cmd, t_data *data)
 		new_process(cmd, data);
 	}
 	else
+	{
 		action_parent(fd);
+		if (data->tmp)
+		{
+			waitpid(parent, &status, 0);
+			g_exit_status = WEXITSTATUS(status);
+			if (WIFSIGNALED(status))
+				g_exit_status = 128 + WTERMSIG(status);
+		}
+	}
 }
 
 void	open_fd_with_type(char *redr, char *file, t_data *data)
