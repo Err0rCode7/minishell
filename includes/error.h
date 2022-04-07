@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:54 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/06 23:58:28 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/07 10:44:14 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MSG_CMD_NOT_FOUND_ERR	"command not found"
 # define MSG_HOME_NOT_FOUND_ERR	"HOME not set"
 # define MSG_INVALID_ARG_ERR	"Invalid argument"
+# define MSG_DIR_ERR	"is a directory"
 
 # define STX_ERR		0
 # define STX_OK			1
