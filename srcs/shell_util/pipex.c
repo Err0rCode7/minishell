@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 23:36:58 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:15:37 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	new_process(char *cmd, t_data *data)
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
 	{
-		if (!split_path(data->envp))
+		if (!split_path(data->envp) || !ft_strncmp(new_argv[0], "./", 2)
+		|| !ft_strncmp(new_argv[0], "/", 1))
 			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL);
 		else
 			prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL);
