@@ -33,6 +33,8 @@
 # define MSG_INVALID_ARG_ERR	"Invalid argument"
 # define MSG_DIR_ERR	"is a directory"
 # define MSG_PERMISSION_ERR	"Permission denied"
+# define MSG_OLDPWD_NOT_FOUND_ERR	"OLDPWD not set"
+# define MSG_INVALID_ARG_ERR "Invalid argument"
 
 # define STX_ERR		0
 # define STX_OK			1

@@ -96,6 +96,7 @@ void	execute_word(t_binode *parent, t_data *data)
 	{
 		parent->data = replace_dollar_sign(parent->data, data->envp);
 		new_argv = cmd_tokenizer(parent->data);
+		add_key_value(&data->envp, ft_strdup(get_last(new_argv)), ft_strdup("_"));
 		if (!new_argv)
 			exit(1);
 		if (switch_routine(new_argv, data))

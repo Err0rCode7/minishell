@@ -79,7 +79,8 @@ void	new_process(char *cmd, t_data *data)
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
 	{
-		if (!path)
+		if (!split_path(data->envp) || !ft_strncmp(new_argv[0], "./", 2)
+		|| !ft_strncmp(new_argv[0], "/", 1))
 			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL);
 		else if (ft_is_dir(path))
 		{

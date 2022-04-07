@@ -22,7 +22,7 @@ void	handle_signal(int signo)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_exit_status = 130;
+		g_exit_status = 1;
 	}
 	else if (signo == SIGQUIT)
 	{
@@ -43,7 +43,9 @@ void	ignore_sig(int signo)
 	else if (signo == SIGQUIT)
 	{
 		rl_on_new_line();
-		ft_putstr_fd("Quit: 3\b\b\b\b\b\b\b", STDOUT);
+		//ft_putstr_fd("Quit: 3\b\b\b\b\b\b\b", STDOUT);
+		ft_putstr_fd("Quit: 3\n", STDOUT);
+		g_exit_status = 131;
 	}
 }
 

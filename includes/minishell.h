@@ -135,7 +135,11 @@ char		*get_cmd(char **buf);
 /*
 ** chk_input.c
 */
-int			pre_process_input(char *str);
+int			pre_process_input(char **str);
+/*
+** chk_input2.c
+*/
+void		process_escape(char **str);
 /*
 ** divide_parse.c
 */
@@ -255,6 +259,11 @@ int			switch_routine(char **new_argv, t_data *data);
 ** pt_env.c
 */
 int			pt_env(char **envp, char *prefix, char **new_argv);
+/*
+** pt_env2.c
+*/
+void		add_key_value(char ***envp, char *value, char *key);
+char		*get_last(char **arr);
 /*
 ** pt_export.c
 */

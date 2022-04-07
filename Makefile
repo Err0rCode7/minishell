@@ -58,6 +58,7 @@ SRCS	=	execute.c				\
 			cmd_tokenizer2.c		\
 			pt_exit.c				\
 			pt_env.c				\
+			pt_env2.c				\
 			pt_export.c				\
 			pt_cd.c					\
 			pt_unset.c				\
@@ -72,6 +73,7 @@ SRCS	+=	signal.c				\
 			signal2.c				\
 			input_cmd.c				\
 			chk_input.c				\
+			chk_input2.c				\
 			init_data.c
 
 # lexer
