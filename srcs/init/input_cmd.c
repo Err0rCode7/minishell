@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:49 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:14:13 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 10:29:11 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_cmd(char **buf)
 	if (!*buf)
 	{
 		printf("\033[1A\033[10C exit\n");
-		exit(1);
+		exit(0);
 	}
 	return (*buf);
 }

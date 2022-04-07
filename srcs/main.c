@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	while (get_cmd(&buf))
 	{
 		init_data(&data);
-		if (!pre_process_input(buf))
+		if (!pre_process_input(&buf))
 			continue ;
 		tree = parsetree(buf, &data);
 		exec_tree(tree, &data);
