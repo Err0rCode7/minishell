@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:50:50 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:48:43 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,13 @@ void	child_process(char *cmd, t_data *data)
 		pt_exit_status(MSG_FORK_ERR);
 	else if (!parent)
 	{
+		if (data->redrflag)
+		{
+			data->redrflag = 0;
+			new_process(cmd, data);
+		}
 		close(fd[0]);
-		if (!data->tmp)
+		if (!data->last)
 			if (-1 == dup2(fd[1], STDOUT_FILENO))
 				error_exit(MSG_DUP_TWO_ERR, EXIT_FAILURE);
 		new_process(cmd, data);
@@ -93,6 +98,7 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 {
 	int	fd;
 
+	data->redrflag = 0;
 	if (!ft_strncmp(redr, "<", 2))
 		left_redr(&fd, file, data);
 	else if (!ft_strncmp(redr, ">", 2))
@@ -106,6 +112,7 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 			pt_exit_status(MSG_FILE_OPEN_ERR);
 		if (0 > dup2(fd, STDOUT_FILENO))
 			pt_exit_status(MSG_DUP_TWO_ERR);
+		close(fd);
 	}
 	else if (!ft_strncmp(redr, "<<", ft_strlen(redr)))
 	{

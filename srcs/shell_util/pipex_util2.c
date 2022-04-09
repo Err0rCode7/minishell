@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 17:00:20 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:44:57 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	right_redr(int *fd, char *file, t_data *data)
 		pt_exit_status(MSG_DUP_TWO_ERR);
 	if (*fd > 0)
 		close(*fd);
+	data->redrflag = 1;
 }
 
 void	action_parent(int *fd)

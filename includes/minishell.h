@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 21:41:28 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:43:18 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ typedef struct s_data
 	int		pipeflag;
 	int		wordcnt;
 	int		roe_flag;
-	int		tmp;
+	int		last;
 	char	*home;
 	int		oldpwd;
+	int		redrflag;
 }				t_data;
 
 typedef struct s_fdargs

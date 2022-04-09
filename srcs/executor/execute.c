@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:46:42 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:41:29 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	execute_word(t_binode *parent, t_data *data)
 	if (data->pipeflag)
 	{
 		data->pipecnt--;
-		data->tmp = 0;
+		data->last = 0;
 		if (data->pipecnt == -1)
-			data->tmp = 1;
+			data->last = 1;
 		child_process(parent->data, data);
 		data->roe_flag = 0;
 	}
