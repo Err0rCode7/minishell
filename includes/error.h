@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:54 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 21:35:26 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:33:19 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define MSG_DIR_ERR	"is a directory"
 # define MSG_PERMISSION_ERR	"Permission denied"
 # define MSG_OLDPWD_NOT_FOUND_ERR	"OLDPWD not set"
+# define MSG_ARG_ERR "filename argument required"
 
 # define STX_ERR		0
 # define STX_OK			1

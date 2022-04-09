@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:20:50 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:26:26 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:38:09 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ int	find_char_start(char *cmd)
 	while (is_space(cmd[i]))
 		i++;
 	return (i);
+}
+
+int	only_dot(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] == '.')
+		i++;
+	if (!cmd[i])
+		return (1);
+	return (0);
 }

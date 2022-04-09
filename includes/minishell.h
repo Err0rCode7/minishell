@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 22:43:18 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:38:06 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ void		left_redr(int *fd, char *file, t_data *data);
 int			ft_access2(char *name, int option);
 int			ft_is_dir(char *name);
 int			find_char_start(char *cmd);
+int			only_dot(char *cmd);
 
 /*
 ** buffer.c

@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 23:10:06 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:43:37 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ void	set_home(char **new_argv, t_data *data)
 
 static int	fail_execve(char *path, char **new_argv)
 {
-	if (!path)
+	if (path && !ft_strncmp(*new_argv, ".", 2))
+	{
+		prt_cmd_err_s_name(MSG_ARG_ERR, new_argv[0], NULL, 2);
+		write(2, ".: usage: . filename [arguments]\n", 33);
+	}
+	else if (only_dot(*new_argv))
+		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+	else if (!path)
 		prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
 	else if (ft_is_dir(path))
 		prt_cmd_err_s_name(MSG_DIR_ERR, new_argv[0], NULL, 126);
