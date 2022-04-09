@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 13:03:21 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:41:31 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	init_set(t_data *data, char **envp)
 	prt_image();
 	data->envp = dup_envp(envp);
 	data->home = find_home("", envp);
+	data->oldpwd = FALSE;
 }
 
 void	init_data(t_data *data, int argc, char **argv)

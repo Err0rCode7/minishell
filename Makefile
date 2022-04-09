@@ -6,7 +6,7 @@
 #    By: taewan <taewan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 15:11:50 by seujeon           #+#    #+#              #
-#    Updated: 2022/04/09 21:02:06 by taewan           ###   ########.fr        #
+#    Updated: 2022/04/09 21:20:10 by taewan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,8 @@ SRCS	+=	divide_parse.c			\
 			error.c 				\
 			buffer.c				\
 			parse_util3.c			\
-			pipex_util2.c
+			pipex_util2.c			\
+			pipex_util3.c
 
 # print banner img
 

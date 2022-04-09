@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 21:01:38 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:41:28 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_data
 	int		roe_flag;
 	int		tmp;
 	char	*home;
+	int		oldpwd;
 }				t_data;
 
 typedef struct s_fdargs
@@ -185,6 +186,7 @@ t_binode	*parsetree(char *str, t_data *data);
 void		here_doc_child(int *fd, char *limit, t_data *data);
 char		*find_path(char **envp, char *cmd);
 char		**split_path(char **envp);
+int			ft_access(char *file, int option);
 
 /*
 ** init_data.c
@@ -217,6 +219,13 @@ void		here_doc(char *limit, t_data *data);
 void		action_parent(int *fd);
 void		right_redr(int *fd, char *file, t_data *data);
 void		left_redr(int *fd, char *file, t_data *data);
+
+/*
+** pipex_util3.c
+*/
+int			ft_access2(char *name, int option);
+int			ft_is_dir(char *name);
+int			find_char_start(char *cmd);
 
 /*
 ** buffer.c

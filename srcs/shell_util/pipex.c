@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 16:58:46 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:50:50 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	set_home(char **new_argv, t_data *data)
 	}
 }
 
+static int	fail_execve(char *path, char **new_argv)
+{
+	if (!path)
+		prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+	else if (ft_is_dir(path))
+		prt_cmd_err_s_name(MSG_DIR_ERR, new_argv[0], NULL, 126);
+	else if (ft_access2(path, S_IREAD) && !ft_access2(path, S_IEXEC))
+		prt_cmd_err_s_name(MSG_PERMISSION_ERR, new_argv[0], NULL, 126);
+	else if (ft_access2(path, S_IEXEC))
+		g_exit_status = 0;
+	else
+		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+	return (g_exit_status);
+}
+
 void	new_process(char *cmd, t_data *data)
 {
 	char	**new_argv;
@@ -46,25 +61,7 @@ void	new_process(char *cmd, t_data *data)
 	path = find_path(data->envp, new_argv[0]);
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
-	{
-		if (opendir(cmd))
-			prt_cmd_err_s_name(MSG_DIRECTORY_ERR, new_argv[0], NULL, 126);
-		else if (!split_path(data->envp) || *cmd == '.' || *cmd == '/')
-			prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
-		else
-			prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
-		exit(g_exit_status);
-	}
-}
-
-static int	find_char_start(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (is_space(cmd[i]))
-		i++;
-	return (i);
+		exit(fail_execve(path, new_argv));
 }
 
 void	child_process(char *cmd, t_data *data)
