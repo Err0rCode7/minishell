@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 23:43:37 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 00:02:44 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ void	new_process(char *cmd, t_data *data)
 	if (switch_routine(new_argv, data) == 0)
 		exit(g_exit_status);
 	path = find_path(data->envp, new_argv[0]);
+	if (!ft_strncmp(path, new_argv[0], ft_strlen(path) + 1))
+	{
+		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+		exit(g_exit_status);
+	}
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
 		exit(fail_execve(path, new_argv));
