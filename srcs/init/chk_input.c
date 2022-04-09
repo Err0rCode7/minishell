@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:01:44 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 12:07:28 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static int	chk_is_valid(char *str)
 	if (args.flag_sq || args.flag_bq)
 	{
 		ft_putstr_fd(MSG_QUOTE_ERR, STDERR);
+		write(2, "\n", 1);
+		g_exit_status = 258;
 		return (FALSE);
 	}
 	return (TRUE);

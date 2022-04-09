@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:54 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/06 23:58:28 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 11:09:10 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@
 void	error_exit(char *msg, int exitcode);
 void	prterr_exit(void);
 int		prt_error(char *msg);
-void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg);
+void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg, int errnum);
 
 #endif

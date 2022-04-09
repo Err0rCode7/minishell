@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:14 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:23:45 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 11:55:22 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	pt_exit(char **cmd, int pipeflag)
 {
 	int	cnt;
 
-	g_exit_status = 0;
 	cnt = 0;
 	while (cmd[cnt] != NULL)
 		cnt++;

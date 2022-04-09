@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 23:36:58 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 13:00:14 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	new_process(char *cmd, t_data *data)
 	char	**new_argv;
 	char	*path;
 
-	g_exit_status = 0;
 	cmd = replace_dollar_sign(cmd, data->envp);
 	new_argv = cmd_tokenizer(cmd);
 	if (!new_argv)
@@ -49,10 +48,12 @@ void	new_process(char *cmd, t_data *data)
 	if (execve(path, new_argv, data->envp) == -1)
 	{
 		if (!split_path(data->envp))
-			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL);
+			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0],
+				NULL, 127);
 		else
-			prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL);
-		exit(127);
+			prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0],
+				NULL, 127);
+		exit(g_exit_status);
 	}
 }
 

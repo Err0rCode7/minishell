@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:53 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 12:35:57 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 12:53:46 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_signal(int signo)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_exit_status = 130;
+		g_exit_status = 1;
 	}
 	else if (signo == SIGQUIT)
 	{
@@ -44,6 +44,7 @@ void	ignore_sig(int signo)
 	{
 		rl_on_new_line();
 		ft_putstr_fd("Quit: 3\n", STDOUT);
+		g_exit_status = 131;
 	}
 }
 

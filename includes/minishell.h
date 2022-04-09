@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/05 23:21:08 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 13:03:35 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ char		**split_path(char **envp);
 /*
 ** init_data.c
 */
-void		init_data(t_data *data);
+void		init_data(t_data *data, int argc, char **argv);
 void		init_set(t_data *data, char **envp);
 
 /*

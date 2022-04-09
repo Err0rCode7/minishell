@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/03 11:44:46 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 12:57:29 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	str_only_space(char *str)
 void	exec_fork(t_binode *parent, t_data *data)
 {
 	pid_t	pid;
+	int		status;
 
 	ignore_signal(ignore_sig);
 	pid = fork();
@@ -68,7 +69,12 @@ void	exec_fork(t_binode *parent, t_data *data)
 	if (!pid)
 		new_process(parent->data, data);
 	else
-		init_signal(handle_signal);
+	{
+		waitpid(pid, &status, 0);
+		if (status != 0)
+			status += 128;
+		g_exit_status = status;
+	}
 }
 
 void	execute_word(t_binode *parent, t_data *data)

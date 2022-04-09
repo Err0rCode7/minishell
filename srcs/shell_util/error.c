@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:21 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 23:23:18 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 11:11:17 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "minishell.h"
 
 void	error_exit(char *msg, int exitcode)
 {
@@ -38,8 +38,9 @@ int	prt_error(char *msg)
 	return (0);
 }
 
-void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg)
+void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg, int errnum)
 {
+	g_exit_status = errnum;
 	write(2, "minishell: ", 11);
 	write(2, cmd, ft_strlen(cmd));
 	write(2, ": ", 2);
