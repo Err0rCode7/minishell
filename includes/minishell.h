@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 16:53:58 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:01:38 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ char		*get_cmd(char **buf);
 /*
 ** chk_input.c
 */
-int			pre_process_input(char *str);
+int			pre_process_input(char **str);
+void		process_escape(char **str);
 /*
 ** divide_parse.c
 */

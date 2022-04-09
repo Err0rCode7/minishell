@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 12:07:28 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:02:57 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ static int	chk_is_valid(char *str)
 	return (TRUE);
 }
 
-int	pre_process_input(char *str)
+int	pre_process_input(char **str)
 {
-	add_history(str);
-	if (!(chk_is_valid(str)))
+	add_history(*str);
+	process_escape(str);
+	if (!(chk_is_valid(*str)))
 	{
-		free(str);
+		free(*str);
+		g_exit_status = 1;
 		return (FALSE);
 	}
 	return (TRUE);

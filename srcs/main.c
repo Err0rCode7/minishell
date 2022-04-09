@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 16:19:42 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 20:58:23 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 	while (get_cmd(&buf))
 	{
 		init_data(&data, argc, argv);
-		if (!pre_process_input(buf))
+		if (!pre_process_input(&buf))
 			continue ;
 		tree = parsetree(buf, &data);
 		exec_tree(tree, &data);

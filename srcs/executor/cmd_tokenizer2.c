@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:00:44 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:00:47 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ void	put_buffer(t_buffer *buff, char c, int sw)
 		|| ((sw & DQUOTE) && (c == '\'')))
 		buff->arr[buff->size++] = c;
 	else if (c != '\'' && c != '\"')
+	{
+		if (c < 0)
+			c += 100;
 		buff->arr[buff->size++] = c;
+	}
 }
