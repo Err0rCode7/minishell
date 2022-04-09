@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 13:00:14 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 16:58:46 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,24 @@ void	new_process(char *cmd, t_data *data)
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
 	{
-		if (!split_path(data->envp))
-			prt_cmd_err_shellname(MSG_FILE_NOT_FOUND_ERR, new_argv[0],
-				NULL, 127);
+		if (opendir(cmd))
+			prt_cmd_err_s_name(MSG_DIRECTORY_ERR, new_argv[0], NULL, 126);
+		else if (!split_path(data->envp) || *cmd == '.' || *cmd == '/')
+			prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
 		else
-			prt_cmd_err_shellname(MSG_CMD_NOT_FOUND_ERR, new_argv[0],
-				NULL, 127);
+			prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
 		exit(g_exit_status);
 	}
+}
+
+static int	find_char_start(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (is_space(cmd[i]))
+		i++;
+	return (i);
 }
 
 void	child_process(char *cmd, t_data *data)
@@ -65,6 +75,8 @@ void	child_process(char *cmd, t_data *data)
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
 	ignore_signal(ignore_sig);
+	if (!ft_strncmp(cmd + find_char_start(cmd), "more", 5))
+		more_signal(more_sig);
 	parent = fork();
 	if (parent < 0)
 		pt_exit_status(MSG_FORK_ERR);

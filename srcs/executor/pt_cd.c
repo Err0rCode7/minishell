@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 13:00:41 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 16:59:30 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	pt_cd(char **argv, t_data *data)
 	if (!argv[1])
 	{
 		if (chdir(path))
-			prt_cmd_err_shellname(MSG_HOME_NOT_FOUND_ERR, argv[0], NULL, 1);
+			prt_cmd_err_s_name(MSG_HOME_NOT_FOUND_ERR, argv[0], NULL, 1);
 		free(path);
 		return (0);
 	}

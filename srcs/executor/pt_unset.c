@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:27 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 11:08:23 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 16:59:18 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	pt_unset(char ***envp, char **new_argv)
 	{
 		if (!is_valid_key(*new_argv))
 		{
-			prt_cmd_err_shellname(MSG_IDDENTIFIER_ERR, "unset", *new_argv, 1);
+			prt_cmd_err_s_name(MSG_IDDENTIFIER_ERR, "unset", *new_argv, 1);
 			continue ;
 		}
 		i = get_env_var(*new_argv, *envp);

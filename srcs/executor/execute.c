@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 12:57:29 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 16:51:19 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	exec_fork(t_binode *parent, t_data *data)
 	else
 	{
 		waitpid(pid, &status, 0);
-		if (status != 0)
-			status += 128;
-		g_exit_status = status;
+		g_exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+			g_exit_status = 128 + WTERMSIG(status);
 	}
 }
 

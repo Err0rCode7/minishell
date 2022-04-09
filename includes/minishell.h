@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 13:03:35 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/09 16:53:58 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
 
 # include "libft.h"
 # include "tree.h"
@@ -125,6 +126,8 @@ void		init_signal(void (*handler)(int));
 */
 void		heredoc_signal(int signo);
 int			handle_endline(char *line);
+void		more_sig(int signo);
+void		more_signal(void (*handle)(int));
 
 /*
 ** input_cmd.c

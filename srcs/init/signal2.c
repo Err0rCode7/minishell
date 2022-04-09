@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:03:01 by seujeon           #+#    #+#             */
-/*   Updated: 2022/03/23 15:13:56 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:16:20 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,20 @@ int	handle_endline(char *line)
 	write(1, "\033[1A", ft_strlen("\033[1A"));
 	write(1, "\033[2C", ft_strlen("\033[2C"));
 	return (TRUE);
+}
+
+void	more_sig(int signo)
+{
+	if (signo == SIGINT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
+void	more_signal(void (*handle)(int))
+{
+	(void)handle;
+	signal(SIGINT, more_sig);
+	signal(SIGQUIT, more_sig);
 }
