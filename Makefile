@@ -6,7 +6,7 @@
 #    By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 15:11:50 by seujeon           #+#    #+#              #
-#    Updated: 2022/04/07 10:25:10 by seujeon          ###   ########.fr        #
+#    Updated: 2022/03/23 15:11:52 by seujeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ SRCS	=	execute.c				\
 			cmd_tokenizer2.c		\
 			pt_exit.c				\
 			pt_env.c				\
-			pt_env2.c				\
 			pt_export.c				\
 			pt_cd.c					\
 			pt_unset.c				\
@@ -73,7 +72,6 @@ SRCS	+=	signal.c				\
 			signal2.c				\
 			input_cmd.c				\
 			chk_input.c				\
-			chk_input2.c				\
 			init_data.c
 
 # lexer

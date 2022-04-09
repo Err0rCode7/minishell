@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/07 01:02:05 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:19:42 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	exec_tree(t_binode *tree, t_data *data)
 	if (data->syntax == STX_ERR || data->wordcnt - data->pipecnt != 1)
 	{
 		prt_error(MSG_GENERAL_SYNTAX_ERR);
-		g_exit_status = 1;
-		if (data->syntax == STX_ERR)
-			g_exit_status = 258;
+		g_exit_status = 258;
 	}
 	else
 		execute(tree, data);
@@ -44,20 +42,19 @@ int	main(int argc, char **argv, char **envp)
 	int			original_fd[2];
 	int			status;
 
-	(void)argc;
-	(void)argv;
 	if (!ft_dup(original_fd))
 		return (1);
 	init_set(&data, envp);
 	while (get_cmd(&buf))
 	{
-		init_data(&data);
-		if (!pre_process_input(&buf))
+		init_data(&data, argc, argv);
+		if (!pre_process_input(buf))
 			continue ;
 		tree = parsetree(buf, &data);
 		exec_tree(tree, &data);
-		//수정 필요
-		while (wait(&status) != -1);
+		if (data.pipeflag)
+			while (wait(&status) != -1)
+				g_exit_status = WEXITSTATUS(status);
 		init_signal(handle_signal);
 		free(buf);
 		dup2(original_fd[0], STDIN_FILENO);

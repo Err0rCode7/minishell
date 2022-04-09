@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/07 11:13:24 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:53:58 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
-# include <sys/stat.h>
 
 # include "libft.h"
 # include "tree.h"
@@ -127,6 +126,8 @@ void		init_signal(void (*handler)(int));
 */
 void		heredoc_signal(int signo);
 int			handle_endline(char *line);
+void		more_sig(int signo);
+void		more_signal(void (*handle)(int));
 
 /*
 ** input_cmd.c
@@ -135,11 +136,7 @@ char		*get_cmd(char **buf);
 /*
 ** chk_input.c
 */
-int			pre_process_input(char **str);
-/*
-** chk_input2.c
-*/
-void		process_escape(char **str);
+int			pre_process_input(char *str);
 /*
 ** divide_parse.c
 */
@@ -187,12 +184,11 @@ t_binode	*parsetree(char *str, t_data *data);
 void		here_doc_child(int *fd, char *limit, t_data *data);
 char		*find_path(char **envp, char *cmd);
 char		**split_path(char **envp);
-int			ft_access(char *file, int option);
 
 /*
 ** init_data.c
 */
-void		init_data(t_data *data);
+void		init_data(t_data *data, int argc, char **argv);
 void		init_set(t_data *data, char **envp);
 
 /*
@@ -259,11 +255,6 @@ int			switch_routine(char **new_argv, t_data *data);
 ** pt_env.c
 */
 int			pt_env(char **envp, char *prefix, char **new_argv);
-/*
-** pt_env2.c
-*/
-void		add_key_value(char ***envp, char *value, char *key);
-char		*get_last(char **arr);
 /*
 ** pt_export.c
 */

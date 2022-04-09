@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 23:21:05 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 13:03:21 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	init_set(t_data *data, char **envp)
 	data->home = find_home("", envp);
 }
 
-void	init_data(t_data *data)
+void	init_data(t_data *data, int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	data->syntax = STX_OK;
 	data->pipecnt = 0;
 	data->roe_flag = 0;

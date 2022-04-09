@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/07 10:06:45 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:51:19 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	execute_word(t_binode *parent, t_data *data)
 	{
 		parent->data = replace_dollar_sign(parent->data, data->envp);
 		new_argv = cmd_tokenizer(parent->data);
-		add_key_value(&data->envp, ft_strdup(get_last(new_argv)), ft_strdup("_"));
 		if (!new_argv)
 			exit(1);
 		if (switch_routine(new_argv, data))

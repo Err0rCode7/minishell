@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:06 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/05 22:42:12 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 12:58:34 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	set_env(char **new_argv)
 	ft_split_free(tmp);
 }
 
-static int set_env_error(char *new_argv)
+static int	set_env_error(char *new_argv)
 {
 	if (ft_strchr(new_argv, '=') == NULL)
 	{

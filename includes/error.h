@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:54 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/07 10:52:10 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:58:26 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@
 # define MSG_CMD_NOT_FOUND_ERR	"command not found"
 # define MSG_HOME_NOT_FOUND_ERR	"HOME not set"
 # define MSG_INVALID_ARG_ERR	"Invalid argument"
-# define MSG_DIR_ERR	"is a directory"
-# define MSG_PERMISSION_ERR	"Permission denied"
-# define MSG_OLDPWD_NOT_FOUND_ERR	"OLDPWD not set"
-# define MSG_INVALID_ARG_ERR "Invalid argument"
+# define MSG_DIRECTORY_ERR	"is a directory"
 
 # define STX_ERR		0
 # define STX_OK			1
@@ -42,6 +39,6 @@
 void	error_exit(char *msg, int exitcode);
 void	prterr_exit(void);
 int		prt_error(char *msg);
-void	prt_cmd_err_shellname(char *msg, char *cmd, char *arg);
+void	prt_cmd_err_s_name(char *msg, char *cmd, char *arg, int errnum);
 
 #endif
