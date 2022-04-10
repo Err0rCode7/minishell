@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/10 13:30:54 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 13:34:49 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	new_process(char *cmd, t_data *data)
 	}
 	if (execve(path, new_argv, data->envp) == -1)
 		exit(fail_execve(path, new_argv,
-				get_env_var("PATH", data->envp) != NULL));
+				data->envp[get_env_var("PATH", data->envp)] != NULL));
 }
 
 void	child_process(char *cmd, t_data *data)
