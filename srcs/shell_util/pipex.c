@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/10 12:49:13 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/10 13:30:54 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	set_home(char **new_argv, t_data *data)
 	}
 }
 
-static int	fail_execve(char *path, char **new_argv)
+static int	fail_execve(char *path, char **new_argv, int exist_path)
 {
+	printf("%s %s\n", path, new_argv[0]);
 	if (path && !ft_strncmp(*new_argv, ".", 2))
 	{
 		prt_cmd_err_s_name(MSG_ARG_ERR, new_argv[0], NULL, 2);
@@ -39,7 +40,7 @@ static int	fail_execve(char *path, char **new_argv)
 	}
 	else if (only_dot(*new_argv))
 		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
-	else if (!path)
+	else if (!path && !exist_path)
 		prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
 	else if (ft_is_dir(path))
 		prt_cmd_err_s_name(MSG_DIR_ERR, new_argv[0], NULL, 126);
@@ -75,7 +76,8 @@ void	new_process(char *cmd, t_data *data)
 		exit(g_exit_status);
 	}
 	if (execve(path, new_argv, data->envp) == -1)
-		exit(fail_execve(path, new_argv));
+		exit(fail_execve(path, new_argv,
+				get_env_var("PATH", data->envp) != NULL));
 }
 
 void	child_process(char *cmd, t_data *data)

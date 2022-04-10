@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:20:50 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 23:56:36 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 13:29:43 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	ft_access2(char *name, int option)
 {
 	struct stat	buf;
 
+	if (!name)
+		return (FALSE);
 	stat(name, &buf);
 	return ((buf.st_mode & option) != 0
 		|| (buf.st_mode & (option >> 3)) != 0
