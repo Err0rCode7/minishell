@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:45:33 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 12:35:39 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ int	check_oldpwd(char **argv, t_data *data, int *is_oldpwd)
 	*is_oldpwd = FALSE;
 	if (argv[1] && ft_strcmp(argv[1], "-") == 0)
 	{
-		if (!data->oldpwd)
-		{
-			print_execute_err_3("minishell", argv[0], "OLDPWD not set");
-			g_exit_status = 1;
-			return (1);
-		}
 		envp = data->envp + get_env_var("OLDPWD", data->envp);
 		if (!*envp)
 		{

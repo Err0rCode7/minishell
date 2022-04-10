@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chk_input2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 20:59:05 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:29:31 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 12:15:51 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	process_escape(char **str)
 
 	if (!str)
 		exit(1);
-	buf = ft_calloc(sizeof(char), ft_strlen(*str));
+	buf = ft_calloc(sizeof(char), ft_strlen(*str) + 1);
 	if (!buf)
 		exit(1);
 	escape_logic(str, buf);
