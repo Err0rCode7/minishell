@@ -6,7 +6,7 @@
 /*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/10 12:27:19 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/10 12:49:13 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	new_process(char *cmd, t_data *data)
 		exit(g_exit_status);
 	path = find_path(data->envp, new_argv[0]);
 	set_home(new_argv, data);
-	// if (!ft_strcmp(new_argv[0], path) && ft_strcmp("minishell", new_argv[0])
-	// 	&& !ft_strchr(new_argv[0], '/') && ft_access2(new_argv[0], S_IEXEC))
-	// {
-	// 	prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
-	// 	exit(g_exit_status);
-	// }
+	if (ft_access2(new_argv[0], S_IEXEC) && !ft_strcmp(new_argv[0], path)
+		&& ft_strcmp("minishell", new_argv[0]) && !ft_strchr(new_argv[0], '/'))
+	{
+		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+		exit(g_exit_status);
+	}
 	if (execve(path, new_argv, data->envp) == -1)
 		exit(fail_execve(path, new_argv));
 }

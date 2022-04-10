@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 23:38:06 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 12:44:48 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ int			count_space(char *str);
 ** cmd_tokenizer2.c
 */
 int			jump_space(char *str, char **arr, t_buffer *buff, t_tokenidx *idx);
-int			switch_ctrl(int	sw, char c);
+int			switch_ctrl(int sw, char c);
 void		put_buffer(t_buffer *buff, char c, int sw);
 /*
 ** pt_exit.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tokenizer2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:04:59 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 12:44:22 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	jump_space(char *str, char **arr, t_buffer *buff, t_tokenidx *idx)
 	return (count_space(str + idx->i));
 }
 
-int	switch_ctrl(int	sw, char c)
+int	switch_ctrl(int sw, char c)
 {
 	if (c == '\'' && !(sw & DQUOTE))
 		sw ^= SQUOTE;
