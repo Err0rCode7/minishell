@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/19 16:05:38 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/19 18:36:33 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ void	child_process(char *cmd, t_data *data)
 
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
-	ignore_signal(ignore_sig);
+	ignore_all_sig(ignore_all_signal_a);
 	if (!ft_strncmp(cmd + find_char_start(cmd), "more", 5))
-		more_signal(more_sig);
+		ignore_all_sig(ignore_all_signal);
 	parent = fork();
+	data->last_pid = parent;
 	if (parent < 0)
 		pt_exit_status(MSG_FORK_ERR);
 	else if (!parent)

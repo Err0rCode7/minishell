@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:03:01 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/09 16:16:20 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/19 18:28:30 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,24 @@ int	handle_endline(char *line)
 	return (TRUE);
 }
 
-void	more_sig(int signo)
+void	ignore_all_signal_a(int signo)
 {
 	if (signo == SIGINT)
 	{
-		rl_on_new_line();
-		rl_redisplay();
+		printf("\n");
+		g_exit_status = 130;
 	}
+	else if (signo == SIGQUIT)
+		g_exit_status = 131;
 }
 
-void	more_signal(void (*handle)(int))
+void	ignore_all_signal(int signo)
 {
-	(void)handle;
-	signal(SIGINT, more_sig);
-	signal(SIGQUIT, more_sig);
+	(void)signo;
+}
+
+void	ignore_all_sig(void (*handle)(int))
+{
+	signal(SIGINT, handle);
+	signal(SIGQUIT, handle);
 }

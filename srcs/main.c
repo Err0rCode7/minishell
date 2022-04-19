@@ -6,11 +6,33 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/17 16:37:12 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/19 18:43:51 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	wait_process(t_data *data)
+{
+	pid_t	tmp;
+	int		status;
+	int		end_flag;
+
+	end_flag = -1;
+	while (1)
+	{
+		tmp = wait(&status);
+		if (tmp == data->last_pid && WIFEXITED(status))
+		{
+			g_exit_status = WEXITSTATUS(status);
+			end_flag = g_exit_status;
+		}
+		if (tmp == -1)
+			break ;
+	}
+	if (end_flag != -1)
+		g_exit_status = end_flag;
+}
 
 void	exec_tree(t_binode *tree, t_data *data)
 {
@@ -40,7 +62,6 @@ int	main(int argc, char **argv, char **envp)
 	t_binode	*tree;
 	t_data		data;
 	int			original_fd[2];
-	int			status;
 
 	if (!ft_dup(original_fd))
 		return (1);
@@ -53,8 +74,7 @@ int	main(int argc, char **argv, char **envp)
 		tree = parsetree(buf, &data);
 		exec_tree(tree, &data);
 		if (data.pipeflag)
-			while (wait(&status) != -1)
-				g_exit_status = WEXITSTATUS(status);
+			wait_process(&data);
 		init_signal(handle_signal);
 		free(buf);
 		dup2(original_fd[0], STDIN_FILENO);

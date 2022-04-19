@@ -6,24 +6,18 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 22:44:57 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/19 17:31:52 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ignore_all_signal(int signo)
-{
-	(void)signo;
-}
 
 void	here_doc(char *limit, t_data *data)
 {
 	pid_t	parent;
 	int		fd[2];
 
-	signal(SIGINT, ignore_all_signal);
-	signal(SIGQUIT, ignore_all_signal);
+	ignore_all_sig(ignore_all_signal);
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
 	parent = fork();

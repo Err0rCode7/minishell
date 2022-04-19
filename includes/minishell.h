@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/10 22:47:49 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/19 18:09:06 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_data
 	char	*home;
 	int		oldpwd;
 	int		redrflag;
+	pid_t	last_pid;
 }				t_data;
 
 typedef struct s_fdargs
@@ -128,8 +129,9 @@ void		init_signal(void (*handler)(int));
 */
 void		heredoc_signal(int signo);
 int			handle_endline(char *line);
-void		more_sig(int signo);
-void		more_signal(void (*handle)(int));
+void		ignore_all_signal_a(int signo);
+void		ignore_all_signal(int signo);
+void		ignore_all_sig(void (*handle)(int));
 
 /*
 ** input_cmd.c
