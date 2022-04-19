@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/19 15:01:47 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/19 16:04:57 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	fail_execve(char *path, char **new_argv, int exist_flag)
 		prt_cmd_err_s_name(MSG_ARG_ERR, new_argv[0], NULL, 2);
 		write(2, ".: usage: . filename [arguments]\n", 33);
 	}
-	else if (only_dot(new_argv[0]) || (new_argv[0][0] != '.'
+	else if (only_dot(new_argv[0]) || (exist_flag && new_argv[0][0] != '.'
 		&& new_argv[0][0] != '/'))
 		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
 	else if (!path && !exist_flag)
