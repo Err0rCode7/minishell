@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/10 12:44:48 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/10 22:47:49 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ int			ft_access2(char *name, int option);
 int			ft_is_dir(char *name);
 int			find_char_start(char *cmd);
 int			only_dot(char *cmd);
+int			exist_path(char **envp);
 
 /*
 ** buffer.c

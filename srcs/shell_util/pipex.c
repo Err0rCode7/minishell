@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/10 13:40:53 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/19 15:01:47 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ void	set_home(char **new_argv, t_data *data)
 	}
 }
 
-static int	fail_execve(char *path, char **new_argv, int exist_path)
+static int	fail_execve(char *path, char **new_argv, int exist_flag)
 {
 	if (path && !ft_strncmp(*new_argv, ".", 2))
 	{
 		prt_cmd_err_s_name(MSG_ARG_ERR, new_argv[0], NULL, 2);
 		write(2, ".: usage: . filename [arguments]\n", 33);
 	}
-	else if (only_dot(*new_argv))
+	else if (only_dot(new_argv[0]) || (new_argv[0][0] != '.'
+		&& new_argv[0][0] != '/'))
 		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
-	else if (!path && !exist_path)
+	else if (!path && !exist_flag)
 		prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
 	else if (ft_is_dir(path))
 		prt_cmd_err_s_name(MSG_DIR_ERR, new_argv[0], NULL, 126);
@@ -48,7 +49,12 @@ static int	fail_execve(char *path, char **new_argv, int exist_path)
 	else if (ft_access2(path, S_IEXEC))
 		g_exit_status = 0;
 	else
-		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+	{
+		if (ft_strchr(new_argv[0], '/'))
+			prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+		else
+			prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+	}
 	return (g_exit_status);
 }
 
@@ -68,15 +74,8 @@ void	new_process(char *cmd, t_data *data)
 		exit(g_exit_status);
 	path = find_path(data->envp, new_argv[0]);
 	set_home(new_argv, data);
-	if (ft_access2(new_argv[0], S_IEXEC) && !ft_strcmp(new_argv[0], path)
-		&& ft_strcmp("minishell", new_argv[0]) && !ft_strchr(new_argv[0], '/'))
-	{
-		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
-		exit(g_exit_status);
-	}
 	if (execve(path, new_argv, data->envp) == -1)
-		exit(fail_execve(path, new_argv,
-				data->envp[get_env_var("PATH", data->envp)] != NULL));
+		exit(fail_execve(path, new_argv, exist_path(data->envp)));
 }
 
 void	child_process(char *cmd, t_data *data)

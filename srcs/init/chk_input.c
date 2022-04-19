@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 21:03:39 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/17 16:54:47 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ static void	chk_quote(t_args *args, char chk)
 static int	is_invld_space(char c)
 {
 	if (c == '\t' || c == '\v' || c == '\f' || c == '\r')
+	{
+		g_exit_status = 1;
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
@@ -44,12 +47,10 @@ static void	init_args(t_args *args)
 	args->flag_bq = 0;
 }
 
-static int	chk_is_valid(char *str)
+static int	chk_is_valid(char *str, int i)
 {
-	int		i;
 	t_args	args;
 
-	i = -1;
 	init_args(&args);
 	while (str[++i])
 	{
@@ -60,7 +61,10 @@ static int	chk_is_valid(char *str)
 		chk_quote(&args, str[i]);
 	}
 	if (args.cnt_space == ft_strlen(str))
+	{
+		g_exit_status = 1;
 		return (FALSE);
+	}
 	if (args.flag_sq || args.flag_bq)
 	{
 		ft_putstr_fd(MSG_QUOTE_ERR, STDERR);
@@ -75,10 +79,9 @@ int	pre_process_input(char **str)
 {
 	add_history(*str);
 	process_escape(str);
-	if (!(chk_is_valid(*str)))
+	if (!(chk_is_valid(*str, -1)))
 	{
 		free(*str);
-		g_exit_status = 1;
 		return (FALSE);
 	}
 	return (TRUE);

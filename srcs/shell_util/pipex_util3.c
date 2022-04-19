@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:20:50 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/10 13:29:43 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 22:47:42 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,16 @@ int	only_dot(char *cmd)
 	if (!cmd[i])
 		return (1);
 	return (0);
+}
+
+int	exist_path(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] && !(correct_env(envp[i], "PATH", 4)))
+		i++;
+	if (!envp[i])
+		return (0);
+	return (1);
 }

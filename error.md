@@ -32,12 +32,12 @@
 3. ls
    - /bin/ls -l .   //OK
    - /bin/ls        //OK
-   - “ls -al”       //OK
-   - “ls” “-al”     //OK
+   - "ls -al"       //OK
+   - "ls" "-al"     //OK
 4. cd
    - 그냥 cd               //OK
    - cd $변수              //OK
-   - cd -                 //OK
+   - cd -                 //OK (cluster 테스트 필요)
    - mkdir -p a/b/c/      //OK
      - rm -rf ../../a     //OK
      - pwd                //OK
@@ -65,11 +65,11 @@
    - ls >>      //OK
    - ls >>>     //OK
    - ls >>>>    //OK
-8. 실행 파일
+8. 실행 파일 (minishell과 ./minishell은 둘다 실행??)
     - ./없는 파일         //OK
     - /없는 파일          //OK
     - 실행파일이 아닌 것    //OK
-    - 쉘 스크립트 파일     //
+    - 쉘 스크립트 파일     //OK
 9. Semicolons
     - echo Hello ; pwd ; ls                         //OK
     - echo Hello;pwd;ls                             //OK
@@ -80,18 +80,18 @@
     - Ctrl-D    //OK
     - Ctrl+\\   //OK
 11. Double Quotes
-    - echo “Hello” | cat -e                     //OK
-    - echo “Hello                               //OK
-    - echo ”  Hello ; echo 123       ” | cat -e //OK
-    - echo ”  \\\\\\\\\\\\” “\\\\$HOME $HOME  ” //OK
-    - echo “‘$HOME’”                            //OK
+    - echo "Hello" | cat -e                     //OK
+    - echo "Hello                               //OK
+    - echo "  Hello ; echo 123       " | cat -e //OK
+    - echo "  \\\\\\\\\\\\" "\\\\$HOME $HOME  " //OK
+    - echo "'$HOME'"                            //OK
 12. Environment Variables
     - echo $HOME    //OK
     - echo $PATH    //OK
-    - echo “$HOME”  //OK
-    - echo “$PATH”  //OK
-    - echo ‘$HOME’  //OK
-    - echo ‘$PATH’  //OK
+    - echo "$HOME"  //OK
+    - echo "$PATH"  //OK
+    - echo '$HOME'  //OK
+    - echo '$PATH'  //OK
 13 ~ 14. cd + pwd
     - pwd, ls                            //OK
     - cd srcs -> pwd, ls                 //OK
@@ -109,13 +109,13 @@
     - ls -> unset PATH -> ls                    //OK
     - PATH에 가장 왼쪽에 있는 디렉터리 (path1 & path2) //??
 17. Simple Quotes
-    - echo ‘Hello’                          //OK
-    - echo ‘Hello                           //OK
-    - echo ‘’                               //OK
-    - echo ‘$HOME’                          //OK
+    - echo 'Hello'                          //OK
+    - echo 'Hello                           //OK
+    - echo ''                               //OK
+    - echo '$HOME'                          //OK
     - echo '  $HOME   ;  ; ; echo $PATH $ ' //OK
-    - echo ‘\\\\\\\\\\\\\\\\“”"“’           //OK
-    - echo ‘“$HOME”’                        //OK
+    - echo '\\\\\\\\\\\\\\\\""""'           //OK
+    - echo '"$HOME"'                        //OK
 18. Redirection
     - echo Hello > tmp (새로 만들어)        //OK
     - echo World >> tmp (추가모드)         //OK
@@ -125,7 +125,7 @@
     - > tmp4 echo ABC                    //OK
     - ls -l > tmp6 | grep d              //OK
 19. Pipe
-    - cat /etc/passwd | grep ‘:’ | more //OK
+    - cat /etc/passwd | grep ':' | more //OK -> (터미널 화면이 좁은경우 출력이 이상할 수 있음)
     - ls -l | grep d                    //OK
     - ls invalid | grep d | more        //OK
     - ls -l | grep d > tmp5             //OK

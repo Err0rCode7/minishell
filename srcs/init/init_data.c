@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 22:32:47 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:41:29 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	init_data(t_data *data, int argc, char **argv)
 	data->wordcnt = 0;
 	data->pipeflag = FALSE;
 	data->last = 0;
+	data->redrflag = 0;
 }
