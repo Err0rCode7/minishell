@@ -125,7 +125,7 @@
     - > tmp4 echo ABC                    //OK
     - ls -l > tmp6 | grep d              //OK
 19. Pipe
-    - cat /etc/passwd | grep ':' | more //OK -> (터미널 화면이 좁은경우 출력이 이상할 수 있음)
+    - cat /etc/passwd | grep ':' | more //OK
     - ls -l | grep d                    //OK
     - ls invalid | grep d | more        //OK
     - ls -l | grep d > tmp5             //OK
