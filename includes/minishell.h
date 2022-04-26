@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/19 18:09:06 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/26 18:08:19 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_args
 	size_t	cnt_space;
 	int		flag_sq;
 	int		flag_bq;
+	int		flag_escape;
 }				t_args;
 
 typedef struct s_data
@@ -101,6 +102,8 @@ typedef struct s_data
 	int		oldpwd;
 	int		redrflag;
 	pid_t	last_pid;
+	int		*origin_fd;
+	int		heredoc_flag;
 }				t_data;
 
 typedef struct s_fdargs
@@ -141,7 +144,6 @@ char		*get_cmd(char **buf);
 ** chk_input.c
 */
 int			pre_process_input(char **str);
-void		process_escape(char **str);
 /*
 ** divide_parse.c
 */

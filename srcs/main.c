@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/19 18:43:51 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/26 18:26:40 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!ft_dup(original_fd))
 		return (1);
 	init_set(&data, envp);
+	data.origin_fd = original_fd;
 	while (get_cmd(&buf))
 	{
 		init_data(&data, argc, argv);
@@ -79,6 +80,7 @@ int	main(int argc, char **argv, char **envp)
 		free(buf);
 		dup2(original_fd[0], STDIN_FILENO);
 		dup2(original_fd[1], STDOUT_FILENO);
+		data.heredoc_flag = 0;
 	}
 	return (0);
 }

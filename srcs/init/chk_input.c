@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chk_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:42 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/17 16:54:47 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/26 14:52:01 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	init_args(t_args *args)
 	args->cnt_space = 0;
 	args->flag_sq = 0;
 	args->flag_bq = 0;
+	args->flag_escape = 0;
 }
 
 static int	chk_is_valid(char *str, int i)
@@ -78,7 +79,6 @@ static int	chk_is_valid(char *str, int i)
 int	pre_process_input(char **str)
 {
 	add_history(*str);
-	process_escape(str);
 	if (!(chk_is_valid(*str, -1)))
 	{
 		free(*str);

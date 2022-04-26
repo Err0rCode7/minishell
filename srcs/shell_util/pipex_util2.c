@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/19 17:31:52 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/26 17:48:20 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	here_doc(char *limit, t_data *data)
 {
 	pid_t	parent;
 	int		fd[2];
+	int		status;
 
 	ignore_all_sig(ignore_all_signal);
 	if (pipe(fd) < 0)
@@ -27,10 +28,14 @@ void	here_doc(char *limit, t_data *data)
 		here_doc_child(fd, limit, data);
 	else
 	{
+		waitpid(parent, &status, 0);
+		g_exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+			g_exit_status = 128 + WTERMSIG(status);
 		close(fd[1]);
 		if (-1 == dup2(fd[0], STDIN_FILENO))
 			pt_exit_status(MSG_DUP_TWO_ERR);
-		wait(0);
+		close(fd[0]);
 	}
 }
 

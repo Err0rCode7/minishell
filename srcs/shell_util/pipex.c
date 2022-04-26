@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/19 18:36:33 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/26 18:35:36 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	child_process(char *cmd, t_data *data)
 	pid_t	parent;
 	int		fd[2];
 
+	printf("%d\n", data->pipecnt);
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
 	ignore_all_sig(ignore_all_signal_a);
