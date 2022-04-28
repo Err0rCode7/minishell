@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/26 18:35:36 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:45:43 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	child_process(char *cmd, t_data *data)
 	pid_t	parent;
 	int		fd[2];
 
-	printf("%d\n", data->pipecnt);
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR);
 	ignore_all_sig(ignore_all_signal_a);
@@ -115,9 +114,13 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 	if (!ft_strncmp(redr, "<", 2))
 		left_redr(&fd, file, data);
 	else if (!ft_strncmp(redr, ">", 2))
+	{
+		data->rd_out_flag = 1;
 		right_redr(&fd, file, data);
+	}
 	else if (!ft_strncmp(redr, ">>", 3))
 	{
+		data->rd_out_flag = 1;
 		if (data->roe_flag)
 			return ;
 		fd = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);

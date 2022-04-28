@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:02 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/26 18:44:34 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:05:44 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	check_here_doc(t_data *data, char *str)
 {
-	if (!ft_strncmp(, "<<", 2) && !data->wordcnt)
+	if (!ft_strncmp(str, "<<", 2) && !data->wordcnt)
 		data->wordcnt++;
 }
 
