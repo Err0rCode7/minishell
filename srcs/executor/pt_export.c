@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:18 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 16:59:24 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/28 23:49:45 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,16 @@ int	pt_export(char ***envp, char **new_argv)
 		i++;
 	if (i == 1)
 		pt_env(*envp, PREFIX_EXPORT, new_argv);
-	while (*++new_argv)
+	i = 1;
+	while (new_argv[i])
 	{
-		if (!validate_key(*new_argv))
+		if (!validate_key(new_argv[i]))
 		{
-			prt_cmd_err_s_name(MSG_IDDENTIFIER_ERR, "export", *new_argv, 1);
+			prt_cmd_err_s_name(MSG_IDDENTIFIER_ERR, "export", new_argv[i], 1);
 			continue ;
 		}
-		add_env(envp, *new_argv);
+		add_env(envp, new_argv[i]);
+		i++;
 	}
 	return (0);
 }

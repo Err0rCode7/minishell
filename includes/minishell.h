@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/28 11:41:25 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 00:08:22 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,6 @@ void		add_new_line_to_buffer(char **buffer, char *str);
 ** replace_dollar_sign.c
 */
 int			combine_variable(char **arr, char *str, char **envp);
-void		ignore_single_quote(char *str, int *idx, t_buffer *buff);
 char		*replace_dollar_sign(char *str, char **envp);
 /*
 ** cmd_tokenizer.c
@@ -294,7 +293,7 @@ char		*find_home(char *str, char **envp);
 /*
 ** pt_unset.c
 */
-int			pt_unset(char ***envp, char **new_argv);
+int			pt_unset(char ***envp, char **new_argv, int j);
 int			is_valid_key(char *key);
 
 /*
