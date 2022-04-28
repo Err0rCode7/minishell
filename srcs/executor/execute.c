@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 11:43:30 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/28 21:37:23 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	execute(t_binode *tree, t_data *data)
 {
 	if (!tree)
 		return ;
+	if (tree->type == T_PIPE)
+		data->pipecnt--;
 	if (data->rd_out_flag && tree->type == T_PIPE)
 	{
 		data->rd_out_flag = 0;
@@ -90,7 +92,6 @@ void	execute_word(t_binode *parent, t_data *data)
 		return ;
 	if (data->pipeflag)
 	{
-		data->pipecnt--;
 		data->last = 0;
 		if (data->pipecnt == -1)
 			data->last = 1;
