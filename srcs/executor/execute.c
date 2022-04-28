@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 00:09:06 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/28 23:14:17 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	exec_fork(t_binode *parent, t_data *data)
 	ignore_signal(ignore_sig);
 	pid = fork();
 	if (pid < 0)
-		pt_exit_status(MSG_FORK_ERR);
+		pt_exit_status(MSG_FORK_ERR, data);
 	if (!pid)
 		new_process(parent->data, data);
 	else

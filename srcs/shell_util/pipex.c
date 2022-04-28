@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 21:00:11 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/28 23:29:05 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,30 @@ void	set_home(char **new_argv, t_data *data)
 	}
 }
 
-static int	fail_execve(char *path, char **new_argv, int exist_flag)
+static int	fail_execve(char *path, char **new_argv, int exist_flag, t_data *data)
 {
 	if (path && !ft_strncmp(*new_argv, ".", 2))
 	{
-		prt_cmd_err_s_name(MSG_ARG_ERR, new_argv[0], NULL, 2);
-		write(2, ".: usage: . filename [arguments]\n", 33);
+		prt_cmd_err_fd(MSG_ARG_ERR, new_argv[0], 2, data);
+		write(data->errmsg_fd, ".: usage: . filename [arguments]\n", 33);
 	}
 	else if (only_dot(new_argv[0]) || (exist_flag && new_argv[0][0] != '.'
 		&& new_argv[0][0] != '/'))
-		prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+		prt_cmd_err_fd(MSG_CMD_NOT_FOUND_ERR, new_argv[0], 127, data);
 	else if (!path && !exist_flag)
-		prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+		prt_cmd_err_fd(MSG_FILE_NOT_FOUND_ERR, new_argv[0], 127, data);
 	else if (ft_is_dir(path))
-		prt_cmd_err_s_name(MSG_DIR_ERR, new_argv[0], NULL, 126);
+		prt_cmd_err_fd(MSG_DIR_ERR, new_argv[0], 126, data);
 	else if (ft_access2(path, S_IREAD) && !ft_access2(path, S_IEXEC))
-		prt_cmd_err_s_name(MSG_PERMISSION_ERR, new_argv[0], NULL, 126);
+		prt_cmd_err_fd(MSG_PERMISSION_ERR, new_argv[0], 126, data);
 	else if (ft_access2(path, S_IEXEC))
 		g_exit_status = 0;
 	else
 	{
 		if (ft_strchr(new_argv[0], '/'))
-			prt_cmd_err_s_name(MSG_FILE_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+			prt_cmd_err_fd(MSG_FILE_NOT_FOUND_ERR, new_argv[0], 127, data);
 		else
-			prt_cmd_err_s_name(MSG_CMD_NOT_FOUND_ERR, new_argv[0], NULL, 127);
+			prt_cmd_err_fd(MSG_CMD_NOT_FOUND_ERR, new_argv[0], 127, data);
 	}
 	return (g_exit_status);
 }
@@ -75,7 +75,7 @@ void	new_process(char *cmd, t_data *data)
 	path = find_path(data->envp, new_argv[0]);
 	set_home(new_argv, data);
 	if (execve(path, new_argv, data->envp) == -1)
-		exit(fail_execve(path, new_argv, exist_path(data->envp)));
+		exit(fail_execve(path, new_argv, exist_path(data->envp), data));
 }
 
 void	child_process(char *cmd, t_data *data)
@@ -84,14 +84,14 @@ void	child_process(char *cmd, t_data *data)
 	int		fd[2];
 
 	if (pipe(fd) < 0)
-		pt_exit_status(MSG_PIPE_ERR);
+		pt_exit_status(MSG_PIPE_ERR, data);
 	ignore_all_sig(ignore_all_signal_a);
 	if (!ft_strncmp(cmd + find_char_start(cmd), "more", 5))
 		ignore_all_sig(ignore_all_signal);
 	parent = fork();
 	data->last_pid = parent;
 	if (parent < 0)
-		pt_exit_status(MSG_FORK_ERR);
+		pt_exit_status(MSG_FORK_ERR, data);
 	else if (!parent)
 	{
 		close(fd[0]);
@@ -99,11 +99,11 @@ void	child_process(char *cmd, t_data *data)
 			new_process(cmd, data);
 		if (!data->last)
 			if (-1 == dup2(fd[1], STDOUT_FILENO))
-				error_exit(MSG_DUP_TWO_ERR, EXIT_FAILURE);
+				error_exit(MSG_DUP_TWO_ERR, EXIT_FAILURE, data);
 		new_process(cmd, data);
 	}
 	else
-		action_parent(fd);
+		action_parent(fd, data);
 }
 
 void	open_fd_with_type(char *redr, char *file, t_data *data)
@@ -125,9 +125,9 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 			return ;
 		fd = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 		if (fd < 0)
-			pt_exit_status(MSG_FILE_OPEN_ERR);
+			pt_exit_status(MSG_FILE_OPEN_ERR, data);
 		if (0 > dup2(fd, STDOUT_FILENO))
-			pt_exit_status(MSG_DUP_TWO_ERR);
+			pt_exit_status(MSG_DUP_TWO_ERR, data);
 		close(fd);
 	}
 	else if (!ft_strncmp(redr, "<<", ft_strlen(redr)))
@@ -136,5 +136,5 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 		init_signal(handle_signal);
 	}
 	else
-		pt_exit_status(MSG_OPEN_FD_WITH_TYPE_ERR);
+		pt_exit_status(MSG_OPEN_FD_WITH_TYPE_ERR, data);
 }

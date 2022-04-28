@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: taewan <taewan@student.42.fr>              +#+  +:+       +#+         #
+#    By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 15:11:50 by seujeon           #+#    #+#              #
-#    Updated: 2022/04/28 20:33:42 by taewan           ###   ########.fr        #
+#    Updated: 2022/04/29 00:44:00 by seujeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,8 @@ SRCS	+=	divide_parse.c			\
 			buffer.c				\
 			parse_util3.c			\
 			pipex_util2.c			\
-			pipex_util3.c
+			pipex_util3.c			\
+			str_maker.c
 
 # print banner img
 

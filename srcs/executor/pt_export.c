@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:18 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:49:45 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 01:04:47 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	add_env(char ***envp, char *new_argv)
 		exit(1);
 }
 
-int	pt_export(char ***envp, char **new_argv)
+int	pt_export(char ***envp, char **new_argv, t_data *data)
 {
 	int		i;
 
@@ -103,13 +103,14 @@ int	pt_export(char ***envp, char **new_argv)
 	while (new_argv[i])
 		i++;
 	if (i == 1)
-		pt_env(*envp, PREFIX_EXPORT, new_argv);
+		pt_env(*envp, PREFIX_EXPORT, new_argv, data);
 	i = 1;
 	while (new_argv[i])
 	{
 		if (!validate_key(new_argv[i]))
 		{
-			prt_cmd_err_s_name(MSG_IDDENTIFIER_ERR, "export", new_argv[i], 1);
+			print_oneline_err(data,
+				get_oneline(MSG_IDDENTIFIER_ERR, "export", new_argv[i], 1));
 			continue ;
 		}
 		add_env(envp, new_argv[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/26 18:42:30 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/28 23:22:22 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	signal(SIGINT, heredoc_signal);
 	signal(SIGQUIT, heredoc_signal);
 	if (-1 == dup2(data->origin_fd[0], STDIN_FILENO))
-		pt_exit_status(MSG_DUP_TWO_ERR);
+		pt_exit_status(MSG_DUP_TWO_ERR, data);
 	close(fd[0]);
 	buffer = NULL;
 	while (1)

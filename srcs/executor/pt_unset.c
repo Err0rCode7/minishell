@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:27 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:54:32 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 01:07:40 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_valid_key(char *key)
 	return (TRUE);
 }
 
-int	pt_unset(char ***envp, char **new_argv, int j)
+int	pt_unset(char ***envp, char **new_argv, int j, t_data *data)
 {
 	int		i;
 
@@ -55,7 +55,7 @@ int	pt_unset(char ***envp, char **new_argv, int j)
 		i++;
 	if (i == 1)
 	{
-		ft_putendl_fd("unset: not enough arguments", STDERR);
+		print_oneline_err(data, ft_strdup("unset: not enough arguments\n"));
 		g_exit_status = 1;
 		return (0);
 	}
@@ -63,7 +63,9 @@ int	pt_unset(char ***envp, char **new_argv, int j)
 	{
 		if (!is_valid_key(new_argv[j]))
 		{
-			prt_cmd_err_s_name(MSG_IDDENTIFIER_ERR, "unset", new_argv[j], 1);
+			print_oneline_err(
+				data,
+				get_oneline(MSG_IDDENTIFIER_ERR, "unset", new_argv[j], 1));
 			continue ;
 		}
 		i = get_env_var(new_argv[j], *envp);

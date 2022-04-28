@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prt_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:14 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 00:03:15 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/28 23:23:35 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	prt_image(void)
 
 	fd = open("ascii_img/shell_image.txt", O_RDONLY, 0644);
 	if (fd < 0)
-		prt_error("Failed to open minishell banner.");
+		prt_error("Failed to open minishell banner.", NULL);
 	gnl = ft_strndup("\n", 1);
 	while (gnl)
 	{

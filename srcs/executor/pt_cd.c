@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/10 12:35:39 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/29 00:52:15 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_oldpwd(char **argv, t_data *data, int *is_oldpwd)
 		envp = data->envp + get_env_var("OLDPWD", data->envp);
 		if (!*envp)
 		{
-			print_execute_err_3("minishell", argv[0], MSG_OLDPWD_NOT_FOUND_ERR);
+			print_execute_err_3("minishell", argv[0], MSG_OLDPWD_NOT_FOUND_ERR, data);
 			g_exit_status = 1;
 			return (1);
 		}
@@ -93,7 +93,7 @@ int	check_to_home(char **argv, t_data *data, char *oldpwd, int is_oldpwd)
 	if (!argv[1])
 	{
 		if (chdir(path))
-			prt_cmd_err_s_name(MSG_HOME_NOT_FOUND_ERR, argv[0], NULL, 1);
+			prt_cmd_err_fd(MSG_HOME_NOT_FOUND_ERR, argv[0], 1, data);
 		free(path);
 		return (set_pwd(data, oldpwd, is_oldpwd));
 	}
@@ -125,6 +125,6 @@ int	pt_cd(char **argv, t_data *data)
 		return (0);
 	free(oldpwd);
 	g_exit_status = 1;
-	print_execute_err_2(argv[0], argv[1], MSG_FILE_NOT_FOUND_ERR);
+	print_execute_err_2(argv[0], argv[1], MSG_FILE_NOT_FOUND_ERR, data);
 	return (0);
 }

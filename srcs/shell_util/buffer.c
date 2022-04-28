@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:12 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/23 15:14:51 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 00:22:05 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ void	add_new_line_to_buffer(char **buffer, char *str)
 		exit(1);
 	free(tmp);
 	*buffer = tmp2;
+}
+
+void	add_str_to_buffer(char **buffer, char *str, int flag)
+{
+	char	*tmp;
+
+	if (!*str)
+		return ;
+	tmp = ft_strjoin(*buffer, str);
+	if (tmp == NULL)
+		exit(1);
+	if (*buffer)
+		free(*buffer);
+	if (str && flag)
+		free(str);
+	*buffer = tmp;
 }

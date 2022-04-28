@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:14 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/09 11:55:22 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 01:04:33 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,37 @@ static int	ft_isdigit_eachstr(char *str)
 	return (TRUE);
 }
 
-static void	process_exit(char **cmd, int cnt, int pipeflag)
+static void	process_exit(char **cmd, int cnt, int pipeflag, t_data *data)
 {
 	if (cnt == 1)
-		print_pipe_exit(pipeflag);
+		print_pipe_exit(pipeflag, data);
 	else if (cnt == 2 && ft_isdigit_eachstr(cmd[1]))
 	{
-		print_pipe_exit(pipeflag);
+		print_pipe_exit(pipeflag, data);
 		g_exit_status = ft_atoi(cmd[1]) % 256;
 	}
 	else if (cnt > 2 && ft_isdigit_eachstr(cmd[1]))
 	{
-		print_execute_err_1("exit", "too many arguments", pipeflag);
+		print_execute_err_1("exit", "too many arguments", pipeflag, data);
 		return ;
 	}
 	else
 	{
-		print_pipe_exit(pipeflag);
-		print_execute_err_2("exit", cmd[1], "numeric argument required");
+		print_oneline_err(data,
+			get_oneline_exitpipe(
+				"exit", cmd[1], "numeric argument required", pipeflag));
 		exit(255);
 	}
 	exit(g_exit_status);
 }
 
-int	pt_exit(char **cmd, int pipeflag)
+int	pt_exit(char **cmd, int pipeflag, t_data *data)
 {
 	int	cnt;
 
 	cnt = 0;
 	while (cmd[cnt] != NULL)
 		cnt++;
-	process_exit(cmd, cnt, pipeflag);
+	process_exit(cmd, cnt, pipeflag, data);
 	return (0);
 }
