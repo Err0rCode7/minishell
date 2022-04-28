@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar_sign.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:46 by taewan            #+#    #+#             */
-/*   Updated: 2022/03/22 15:41:12 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/29 00:19:27 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ int	combine_variable(char **arr, char *str, char **envp)
 		exit(1);
 	free(tmp);
 	return (size - 1);
-}
-
-void	ignore_single_quote(char *str, int *idx, t_buffer *buff)
-{
-	if (str[*idx] == '\'' && buff->size < BUFFER_SIZE)
-	{
-		buff->arr[buff->size++] = str[*idx];
-		while (str[++(*idx)] != '\'' && buff->size < BUFFER_SIZE)
-			buff->arr[buff->size++] = str[*idx];
-	}
 }
 
 char	*find_dollar(char *str, char **envp, t_buffer *buff, int i)

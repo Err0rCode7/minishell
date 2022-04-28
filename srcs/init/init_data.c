@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
 /*   Updated: 2022/04/28 23:26:02 by seujeon          ###   ########.fr       */
@@ -17,7 +17,7 @@ int	get_size_envp(char **str)
 	int	i;
 
 	i = 0;
-	while (*str++)
+	while (str[i])
 		i++;
 	return (i);
 }

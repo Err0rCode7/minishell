@@ -45,7 +45,7 @@ int	is_valid_key(char *key)
 	return (TRUE);
 }
 
-int	pt_unset(char ***envp, char **new_argv, t_data *data)
+int	pt_unset(char ***envp, char **new_argv, int j, t_data *data)
 {
 	int		i;
 
@@ -59,18 +59,19 @@ int	pt_unset(char ***envp, char **new_argv, t_data *data)
 		g_exit_status = 1;
 		return (0);
 	}
-	while (*++new_argv)
+	while (new_argv[j])
 	{
-		if (!is_valid_key(*new_argv))
+		if (!is_valid_key(new_argv[j]))
 		{
 			print_oneline_err(
 				data,
-				get_oneline(MSG_IDDENTIFIER_ERR, "unset", *new_argv, 1));
+				get_oneline(MSG_IDDENTIFIER_ERR, "unset", new_argv[j], 1));
 			continue ;
 		}
-		i = get_env_var(*new_argv, *envp);
+		i = get_env_var(new_argv[j], *envp);
 		if ((*envp)[i])
 			rm_env_var(i, envp);
+		j++;
 	}
 	return (0);
 }

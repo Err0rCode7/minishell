@@ -104,15 +104,17 @@ int	pt_export(char ***envp, char **new_argv, t_data *data)
 		i++;
 	if (i == 1)
 		pt_env(*envp, PREFIX_EXPORT, new_argv, data);
-	while (*++new_argv)
+	i = 1;
+	while (new_argv[i])
 	{
-		if (!validate_key(*new_argv))
+		if (!validate_key(new_argv[i]))
 		{
 			print_oneline_err(data,
-				get_oneline(MSG_IDDENTIFIER_ERR, "export", *new_argv, 1));
+				get_oneline(MSG_IDDENTIFIER_ERR, "export", new_argv[i], 1));
 			continue ;
 		}
-		add_env(envp, *new_argv);
+		add_env(envp, new_argv[i]);
+		i++;
 	}
 	return (0);
 }
