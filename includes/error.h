@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:54 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/10 13:28:54 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/28 22:47:22 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,5 @@
 
 # define STX_ERR		0
 # define STX_OK			1
-
-void	error_exit(char *msg, int exitcode);
-void	prterr_exit(void);
-int		prt_error(char *msg);
-void	prt_cmd_err_s_name(char *msg, char *cmd, char *arg, int errnum);
 
 #endif

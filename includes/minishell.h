@@ -6,7 +6,7 @@
 /*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/28 11:41:25 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 01:02:04 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define MAX_DIRLEN		1024
 
 # define PREFIX_EXPORT "declare -x "
+
+# define ERRMSG_FILE_NAME "err.tmp"
 
 # define SQUOTE			1
 # define DQUOTE			2
@@ -105,6 +107,7 @@ typedef struct s_data
 	int		*origin_fd;
 	int		heredoc_flag;
 	int		rd_out_flag;
+	int		errmsg_fd;
 }				t_data;
 
 typedef struct s_fdargs
@@ -222,7 +225,7 @@ void		open_fd_with_type(char *redr, char *file, t_data *data);
 ** pipex_util2.c
 */
 void		here_doc(char *limit, t_data *data);
-void		action_parent(int *fd);
+void		action_parent(int *fd, t_data *data);
 void		right_redr(int *fd, char *file, t_data *data);
 void		left_redr(int *fd, char *file, t_data *data);
 
@@ -241,6 +244,7 @@ int			exist_path(char **envp);
 int			init_buffer(t_buffer *buffer, size_t size);
 void		flush_buffer(t_buffer *buffer, char **arr);
 void		add_new_line_to_buffer(char **buffer, char *str);
+void		add_str_to_buffer(char **buffer, char *str, int flag);
 /*
 ** replace_dollar_sign.c
 */
@@ -263,7 +267,7 @@ void		put_buffer(t_buffer *buff, char c, int sw);
 /*
 ** pt_exit.c
 */
-int			pt_exit(char **cmd, int pipeflag);
+int			pt_exit(char **cmd, int pipeflag, t_data *data);
 
 /*
 ** executor/switch_routine.c
@@ -272,11 +276,11 @@ int			switch_routine(char **new_argv, t_data *data);
 /*
 ** pt_env.c
 */
-int			pt_env(char **envp, char *prefix, char **new_argv);
+int			pt_env(char **envp, char *prefix, char **new_argv, t_data *data);
 /*
 ** pt_export.c
 */
-int			pt_export(char ***envp, char **new_argv);
+int			pt_export(char ***envp, char **new_argv, t_data *data);
 char		**realloc_env(int env_idx, char ***envp);
 int			get_env_var(char *key, char **envp);
 void		add_env(char ***envp, char *new_argv);
@@ -294,7 +298,7 @@ char		*find_home(char *str, char **envp);
 /*
 ** pt_unset.c
 */
-int			pt_unset(char ***envp, char **new_argv);
+int			pt_unset(char ***envp, char **new_argv, t_data *data);
 int			is_valid_key(char *key);
 
 /*
@@ -308,10 +312,25 @@ int			pt_echo(char **new_argv);
 /*
 ** pt_exit_status.c
 */
-int			pt_exit_status(char *str);
-void		print_pipe_exit(int pipeflag);
-int			print_execute_err_2(char *token1, char *token2, char *err_msg);
-int			print_execute_err_1(char *token, char *err_msg, int pipeflag);
-int			print_execute_err_3(char *head, char *token, char *err_msg);
+int			pt_exit_status(char *str, t_data *data);
+void		print_pipe_exit(int pipeflag, t_data *data);
+int			print_execute_err_2(char *token1, char *token2, char *err_msg, t_data *data);
+int			print_execute_err_1(char *token, char *err_msg, int pipeflag, t_data *data);
+int			print_execute_err_3(char *head, char *token, char *err_msg, t_data *data);
 
+/*
+** error.c
+*/
+void	error_exit(char *msg, int exitcode, t_data *data);
+void	prterr_exit(void);
+int		prt_error(char *msg, t_data *data);
+void	prt_cmd_err_s_name(char *msg, char *cmd, char *arg, int errnum);
+void	prt_cmd_err_fd(char *msg, char *cmd, int errnum, t_data *data);
+
+/*
+** str_maker.c
+*/
+char	*get_oneline(char *msg, char *cmd, char *arg, int errnum);
+void	print_oneline_err(t_data *data, char *str);
+char	*get_oneline_exitpipe(char *token1, char *token2, char *err_msg, int pipeflag);
 #endif

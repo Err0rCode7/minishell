@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/26 18:26:40 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/28 23:31:15 by seujeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,17 @@ static void	wait_process(t_data *data)
 
 void	exec_tree(t_binode *tree, t_data *data)
 {
+	if (data->pipeflag)
+	{
+		if (data->errmsg_fd > 2)
+			close(data->errmsg_fd);
+		data->errmsg_fd = open(ERRMSG_FILE_NAME, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		if (data->errmsg_fd < 0)
+			exit(1);
+	}
 	if (data->syntax == STX_ERR || data->wordcnt - data->pipecnt != 1)
 	{
-		prt_error(MSG_GENERAL_SYNTAX_ERR);
+		prt_error(MSG_GENERAL_SYNTAX_ERR, NULL);
 		g_exit_status = 258;
 	}
 	else
@@ -54,6 +62,29 @@ int	ft_dup(int *original_fd)
 	if (original_fd[0] == -1 || original_fd[1] == -1)
 		return (0);
 	return (1);
+}
+
+static void	flush_errmsg(t_data *data)
+{
+	ssize_t		line;
+	char		c[1];
+
+	if (!data->pipeflag)
+		return ;
+	close(data->errmsg_fd);
+	data->errmsg_fd = open(ERRMSG_FILE_NAME, O_RDONLY);
+	while (1)
+	{
+		line = read(data->errmsg_fd, c, 1);
+		if (line <= 0)
+			break;
+		write(2, c, line);
+	}
+	close(data->errmsg_fd);
+	data->errmsg_fd = 0;
+	line = unlink(ERRMSG_FILE_NAME);
+	if (line < 0)
+		exit(1);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -81,6 +112,7 @@ int	main(int argc, char **argv, char **envp)
 		dup2(original_fd[0], STDIN_FILENO);
 		dup2(original_fd[1], STDOUT_FILENO);
 		data.heredoc_flag = 0;
+		flush_errmsg(&data);
 	}
 	return (0);
 }
