@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:26:02 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:26:23 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_data(t_data *data, int argc, char **argv)
 	data->last = 0;
 	data->redrflag = 0;
 	data->last_pid = 0;
-	data->heredoc_flag = 0;
 	data->rd_out_flag = 0;
 	data->errmsg_fd = 2;
+	data->dev_flag = 0;
 }

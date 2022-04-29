@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:31:15 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:52:49 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,25 @@ static void	wait_process(t_data *data)
 	int		status;
 	int		end_flag;
 
-	end_flag = -1;
-	while (1)
+	if (data->pipeflag)
 	{
-		tmp = wait(&status);
-		if (tmp == data->last_pid && WIFEXITED(status))
+		end_flag = -1;
+		while (1)
 		{
-			g_exit_status = WEXITSTATUS(status);
-			end_flag = g_exit_status;
+			tmp = wait(&status);
+			if (tmp == data->last_pid && WIFEXITED(status))
+			{
+				g_exit_status = WEXITSTATUS(status);
+				end_flag = g_exit_status;
+			}
+			if (tmp == -1)
+				break ;
 		}
-		if (tmp == -1)
-			break ;
+		if (end_flag != -1)
+			g_exit_status = end_flag;
 	}
-	if (end_flag != -1)
-		g_exit_status = end_flag;
+	if (data->dev_flag)
+		g_exit_status = data->dev_flag;
 }
 
 void	exec_tree(t_binode *tree, t_data *data)
@@ -40,7 +45,8 @@ void	exec_tree(t_binode *tree, t_data *data)
 	{
 		if (data->errmsg_fd > 2)
 			close(data->errmsg_fd);
-		data->errmsg_fd = open(ERRMSG_FILE_NAME, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		data->errmsg_fd = open(ERRMSG_FILE_NAME, O_CREAT | O_RDWR | O_TRUNC,
+				0644);
 		if (data->errmsg_fd < 0)
 			exit(1);
 	}
@@ -77,7 +83,7 @@ static void	flush_errmsg(t_data *data)
 	{
 		line = read(data->errmsg_fd, c, 1);
 		if (line <= 0)
-			break;
+			break ;
 		write(2, c, line);
 	}
 	close(data->errmsg_fd);
@@ -105,13 +111,11 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		tree = parsetree(buf, &data);
 		exec_tree(tree, &data);
-		if (data.pipeflag)
-			wait_process(&data);
+		wait_process(&data);
 		init_signal(handle_signal);
 		free(buf);
 		dup2(original_fd[0], STDIN_FILENO);
 		dup2(original_fd[1], STDOUT_FILENO);
-		data.heredoc_flag = 0;
 		flush_errmsg(&data);
 	}
 	return (0);

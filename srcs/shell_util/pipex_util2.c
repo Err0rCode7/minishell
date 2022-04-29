@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 00:21:05 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:54:41 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	left_redr(int *fd, char *file, t_data *data)
 		if (*fd < 0)
 			exit(1);
 		data->roe_flag = 1;
+		data->dev_flag = 1;
 	}
 	if (0 > dup2(*fd, STDIN_FILENO))
 		pt_exit_status(MSG_DUP_TWO_ERR, data);

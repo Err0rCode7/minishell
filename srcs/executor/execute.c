@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:14:17 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:52:40 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	execute(t_binode *tree, t_data *data)
 	if (!tree)
 		return ;
 	if (tree->type == T_PIPE)
+	{
 		data->pipecnt--;
+		data->dev_flag = 0;
+	}
 	if (data->rd_out_flag && tree->type == T_PIPE)
 	{
 		data->rd_out_flag = 0;
@@ -48,6 +51,7 @@ void	execute_redr(t_binode *parent, t_data *data)
 	arr = cmd_tokenizer(parent->data + i);
 	if (!arr || !redr)
 		exit(1);
+	data->redrflag = 0;
 	open_fd_with_type(redr, arr[0], data);
 	free(redr);
 	ft_split_free(arr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_maker.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 00:38:52 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/29 01:09:34 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:09:46 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_oneline(char *msg, char *cmd, char *arg, int errnum)
 {
-	char *buf;
+	char	*buf;
 
 	g_exit_status = errnum;
 	buf = NULL;
@@ -32,7 +32,8 @@ char	*get_oneline(char *msg, char *cmd, char *arg, int errnum)
 	return (buf);
 }
 
-char	*get_oneline_exitpipe(char *token1, char *token2, char *err_msg, int pipeflag)
+char	*get_oneline_exitpipe(char *token1, char *token2, char *err_msg,
+	int pipeflag)
 {
 	char	*buf;
 
@@ -51,7 +52,7 @@ char	*get_oneline_exitpipe(char *token1, char *token2, char *err_msg, int pipefl
 
 void	print_oneline_err(t_data *data, char *str)
 {
-	int fd;
+	int	fd;
 
 	fd = 2;
 	if (data)

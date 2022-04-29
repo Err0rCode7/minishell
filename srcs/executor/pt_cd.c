@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:54 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 00:52:15 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:35:07 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	check_oldpwd(char **argv, t_data *data, int *is_oldpwd)
 		envp = data->envp + get_env_var("OLDPWD", data->envp);
 		if (!*envp)
 		{
-			print_execute_err_3("minishell", argv[0], MSG_OLDPWD_NOT_FOUND_ERR, data);
+			print_execute_err_3("minishell", argv[0], MSG_OLDPWD_NOT_FOUND_ERR,
+				data);
 			g_exit_status = 1;
 			return (1);
 		}

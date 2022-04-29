@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:21 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 00:27:30 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:25:01 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	error_exit(char *msg, int exitcode, t_data *data)
 	add_str_to_buffer(&buf, RESET, 0);
 	add_str_to_buffer(&buf, msg, 0);
 	add_str_to_buffer(&buf, "\n", 0);
+	write(fd, buf, ft_strlen(buf));
+	free(buf);
 	exit(exitcode);
 }
 
@@ -49,7 +51,7 @@ int	prt_error(char *msg, t_data *data)
 	add_str_to_buffer(&buf, RESET, 0);
 	add_str_to_buffer(&buf, msg, 0);
 	add_str_to_buffer(&buf, "\n", 0);
-	write(fd, buf, 1);
+	write(fd, buf, ft_strlen(buf));
 	free(buf);
 	return (0);
 }
@@ -72,8 +74,8 @@ void	prt_cmd_err_s_name(char *msg, char *cmd, char *arg, int errnum)
 
 void	prt_cmd_err_fd(char *msg, char *cmd, int errnum, t_data *data)
 {
-	int fd;
-	char *buf;
+	int		fd;
+	char	*buf;
 
 	fd = 2;
 	if (data)

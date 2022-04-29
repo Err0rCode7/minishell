@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/29 01:02:04 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:26:11 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ typedef struct s_data
 	int		redrflag;
 	pid_t	last_pid;
 	int		*origin_fd;
-	int		heredoc_flag;
 	int		rd_out_flag;
 	int		errmsg_fd;
+	int		dev_flag;
 }				t_data;
 
 typedef struct s_fdargs
@@ -313,23 +313,27 @@ int			pt_echo(char **new_argv);
 */
 int			pt_exit_status(char *str, t_data *data);
 void		print_pipe_exit(int pipeflag, t_data *data);
-int			print_execute_err_2(char *token1, char *token2, char *err_msg, t_data *data);
-int			print_execute_err_1(char *token, char *err_msg, int pipeflag, t_data *data);
-int			print_execute_err_3(char *head, char *token, char *err_msg, t_data *data);
+int			print_execute_err_2(char *token1, char *token2,
+				char *err_msg, t_data *data);
+int			print_execute_err_1(char *token, char *err_msg, int pipeflag,
+				t_data *data);
+int			print_execute_err_3(char *head, char *token, char *err_msg,
+				t_data *data);
 
 /*
 ** error.c
 */
-void	error_exit(char *msg, int exitcode, t_data *data);
-void	prterr_exit(void);
-int		prt_error(char *msg, t_data *data);
-void	prt_cmd_err_s_name(char *msg, char *cmd, char *arg, int errnum);
-void	prt_cmd_err_fd(char *msg, char *cmd, int errnum, t_data *data);
+void		error_exit(char *msg, int exitcode, t_data *data);
+void		prterr_exit(void);
+int			prt_error(char *msg, t_data *data);
+void		prt_cmd_err_s_name(char *msg, char *cmd, char *arg, int errnum);
+void		prt_cmd_err_fd(char *msg, char *cmd, int errnum, t_data *data);
 
 /*
 ** str_maker.c
 */
-char	*get_oneline(char *msg, char *cmd, char *arg, int errnum);
-void	print_oneline_err(t_data *data, char *str);
-char	*get_oneline_exitpipe(char *token1, char *token2, char *err_msg, int pipeflag);
+char		*get_oneline(char *msg, char *cmd, char *arg, int errnum);
+void		print_oneline_err(t_data *data, char *str);
+char		*get_oneline_exitpipe(char *token1, char *token2, char *err_msg,
+				int pipeflag);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:43 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:29:05 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 12:47:57 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	set_home(char **new_argv, t_data *data)
 	}
 }
 
-static int	fail_execve(char *path, char **new_argv, int exist_flag, t_data *data)
+static int	fail_execve(char *path, char **new_argv, int exist_flag,
+	t_data *data)
 {
 	if (path && !ft_strncmp(*new_argv, ".", 2))
 	{
@@ -110,7 +111,6 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 {
 	int	fd;
 
-	data->redrflag = 0;
 	if (!ft_strncmp(redr, "<", 2))
 		left_redr(&fd, file, data);
 	else if (!ft_strncmp(redr, ">", 2))
@@ -131,10 +131,7 @@ void	open_fd_with_type(char *redr, char *file, t_data *data)
 		close(fd);
 	}
 	else if (!ft_strncmp(redr, "<<", ft_strlen(redr)))
-	{
 		here_doc(file, data);
-		init_signal(handle_signal);
-	}
 	else
 		pt_exit_status(MSG_OPEN_FD_WITH_TYPE_ERR, data);
 }
