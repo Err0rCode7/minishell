@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:36 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/28 23:22:22 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 14:03:37 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	here_doc_child(int *fd, char *limit, t_data *data)
 	{
 		line = readline("> ");
 		if (handle_endline(line)
-			|| ft_strncmp(line, limit, ft_strlen(limit)) == 0)
+			|| ft_strncmp(line, limit, ft_strlen(limit) + 1) == 0)
 		{
 			if (buffer != NULL)
 				write(fd[1], buffer, ft_strlen(buffer));

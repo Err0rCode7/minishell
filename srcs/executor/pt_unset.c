@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:27 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 12:40:30 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 13:47:56 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	pt_unset(char ***envp, char **new_argv, int j, t_data *data)
 		if (!is_valid_key(new_argv[j]))
 		{
 			print_oneline_err(data, get_oneline(MSG_IDDENTIFIER_ERR, "unset",
-					new_argv[j], 1));
+					new_argv[j++], 1));
 			continue ;
 		}
 		i = get_env_var(new_argv[j++], *envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pt_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seujeon <seujeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:18 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 01:04:47 by seujeon          ###   ########.fr       */
+/*   Updated: 2022/04/29 13:47:44 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	pt_export(char ***envp, char **new_argv, t_data *data)
 		if (!validate_key(new_argv[i]))
 		{
 			print_oneline_err(data,
-				get_oneline(MSG_IDDENTIFIER_ERR, "export", new_argv[i], 1));
+				get_oneline(MSG_IDDENTIFIER_ERR, "export", new_argv[i++], 1));
 			continue ;
 		}
 		add_env(envp, new_argv[i]);
