@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 12:26:23 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 20:29:20 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ void	init_data(t_data *data, int argc, char **argv)
 	data->rd_out_flag = 0;
 	data->errmsg_fd = 2;
 	data->dev_flag = 0;
+}
+
+void	init_origin_fd(int *original_fd)
+{
+	if (dup2(original_fd[0], STDIN_FILENO) == -1)
+		exit(EXIT_FAILURE);
+	if (dup2(original_fd[1], STDOUT_FILENO) == -1)
+		exit(EXIT_FAILURE);
 }

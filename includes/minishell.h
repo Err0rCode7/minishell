@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:22:50 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/29 12:26:11 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 20:29:13 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ int			ft_access(char *file, int option);
 */
 void		init_data(t_data *data, int argc, char **argv);
 void		init_set(t_data *data, char **envp);
+void		init_origin_fd(int *original_fd);
 
 /*
 ** syntax.c

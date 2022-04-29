@@ -6,7 +6,7 @@
 /*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:03:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 12:52:49 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/29 20:30:17 by taewan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static void	flush_errmsg(t_data *data)
 		return ;
 	close(data->errmsg_fd);
 	data->errmsg_fd = open(ERRMSG_FILE_NAME, O_RDONLY);
+	if (data->errmsg_fd < 0)
+		exit(1);
 	while (1)
 	{
 		line = read(data->errmsg_fd, c, 1);
@@ -114,8 +116,7 @@ int	main(int argc, char **argv, char **envp)
 		wait_process(&data);
 		init_signal(handle_signal);
 		free(buf);
-		dup2(original_fd[0], STDIN_FILENO);
-		dup2(original_fd[1], STDOUT_FILENO);
+		init_origin_fd(original_fd);
 		flush_errmsg(&data);
 	}
 	return (0);
