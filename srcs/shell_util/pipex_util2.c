@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_util2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 12:54:41 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/30 11:26:33 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	here_doc(char *limit, t_data *data)
 	ignore_all_sig(ignore_all_signal);
 	if (pipe(fd) < 0)
 		pt_exit_status(MSG_PIPE_ERR, data);
+	init_origin_fd(data->origin_fd);
 	parent = fork();
 	if (parent < 0)
 		pt_exit_status(MSG_FORK_ERR, data);
