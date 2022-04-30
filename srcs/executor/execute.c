@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 14:55:27 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/30 10:32:00 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	execute(t_binode *tree, t_data *data)
 	if (data->rd_out_flag && tree->type == T_PIPE)
 	{
 		data->rd_out_flag = 0;
-		dup2(data->origin_fd[1], STDOUT_FILENO);
+		if (dup2(data->origin_fd[1], STDOUT_FILENO) == -1)
+			exit(1);
+		data->redrflag = 0;
 	}
 	if (tree->type == T_REDR)
 	{
