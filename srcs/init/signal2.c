@@ -6,7 +6,7 @@
 /*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:03:01 by seujeon           #+#    #+#             */
-/*   Updated: 2022/04/26 18:42:18 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/30 11:31:41 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	heredoc_signal(int signo)
 		rl_on_new_line();
 		rl_redisplay();
 		printf("  \n");
-		exit(1);
+		exit(-42);
 	}
 	else if (signo == SIGQUIT)
 	{

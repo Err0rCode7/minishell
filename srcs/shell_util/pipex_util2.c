@@ -6,11 +6,21 @@
 /*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:02:39 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/30 11:26:33 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/30 11:38:39 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	handle_sig(t_data *data, int status)
+{
+	g_exit_status = WEXITSTATUS(status);
+	if (g_exit_status == 256 - 42)
+	{
+		data->heredoc_sigint = 1;
+		g_exit_status = 1;
+	}
+}
 
 void	here_doc(char *limit, t_data *data)
 {
@@ -30,7 +40,7 @@ void	here_doc(char *limit, t_data *data)
 	else
 	{
 		waitpid(parent, &status, 0);
-		g_exit_status = WEXITSTATUS(status);
+		handle_sig(data, status);
 		if (WIFSIGNALED(status))
 			g_exit_status = 128 + WTERMSIG(status);
 		close(fd[1]);

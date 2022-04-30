@@ -6,7 +6,7 @@
 /*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:00:10 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/30 10:32:00 by taewakim         ###   ########.fr       */
+/*   Updated: 2022/04/30 11:41:35 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	execute(t_binode *tree, t_data *data)
 	{
 		data->pipecnt--;
 		data->dev_flag = 0;
+		data->heredoc_sigint = 0;
 	}
 	if (data->rd_out_flag && tree->type == T_PIPE)
 	{
@@ -28,12 +29,12 @@ void	execute(t_binode *tree, t_data *data)
 			exit(1);
 		data->redrflag = 0;
 	}
-	if (tree->type == T_REDR)
+	if (tree->type == T_REDR && !data->heredoc_sigint)
 	{
 		tree->data = replace_dollar_sign(tree->data, data->envp);
 		execute_redr(tree, data);
 	}
-	if (tree->type == T_WORD)
+	if (tree->type == T_WORD && !data->heredoc_sigint)
 		execute_word(tree, data);
 	execute(tree->left, data);
 	execute(tree->right, data);

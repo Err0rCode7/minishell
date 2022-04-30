@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taewan <taewan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 00:01:45 by taewan            #+#    #+#             */
-/*   Updated: 2022/04/29 20:29:20 by taewan           ###   ########.fr       */
+/*   Updated: 2022/04/30 11:35:38 by taewakim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	init_data(t_data *data, int argc, char **argv)
 	data->rd_out_flag = 0;
 	data->errmsg_fd = 2;
 	data->dev_flag = 0;
+	data->heredoc_sigint = 0;
 }
 
 void	init_origin_fd(int *original_fd)
