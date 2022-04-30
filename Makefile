@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: taewan <taewan@student.42.fr>              +#+  +:+       +#+         #
+#    By: taewakim <taewakim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 15:11:50 by seujeon           #+#    #+#              #
-#    Updated: 2022/04/29 19:52:51 by taewan           ###   ########.fr        #
+#    Updated: 2022/04/30 10:02:35 by taewakim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,8 +120,8 @@ DIR_OBJ	=	./obj
 DIR_FT	=	./libft
 
 # intel Mac Cluster o readline
-#DIR_RL	=	/Users/$(USER)/.brew/opt/readline/lib/
-#RL_INC	=	/Users/$(USER)/.brew/opt/readline/include/
+DIR_RL	=	/Users/$(USER)/.brew/opt/readline/lib/
+RL_INC	=	/Users/$(USER)/.brew/opt/readline/include/
 
 # intel Mac Cluster x readline
 # DIR_RL 	=	/usr/local/opt/readline/lib
@@ -132,8 +132,8 @@ DIR_FT	=	./libft
 #RL_INC	=	/usr/include/
 
 # M1 readline
- DIR_RL = /opt/homebrew/opt/readline/lib
- RL_INC = /opt/homebrew/opt/readline/include
+#  DIR_RL = /opt/homebrew/opt/readline/lib
+#  RL_INC = /opt/homebrew/opt/readline/include
 
 SUBDIRS	=	executor	\
 			init		\
